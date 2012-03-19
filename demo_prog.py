@@ -310,12 +310,12 @@ def main(nfittest=10, nkids=100):
 		i += 1
 		ngens += 1
 		
-		if ngens < 3:
-			pop.gen()
-		else:
-			for organism in pop.organisms:
-				organism.dump()
-			break
+		#if ngens < 3:
+		pop.gen()
+		#else:
+			#for organism in pop.organisms:
+			#	organism.dump()
+			#break
 			#print "failed after 100 generations, restarting"
 			#pop = ProgPop()
 			#ngens = 0
