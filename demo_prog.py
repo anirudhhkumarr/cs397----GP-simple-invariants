@@ -158,11 +158,7 @@ params = [1, 2, 3, 4] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
 	#enter the program or function here
-	p[0] = p[0] + p[1]
-	if p[0] < p[2]:
-		a = p[2]
-	else:
-		a = p[3]
+	p.sort()
 	return locals() #return all the local variables in current scope
 	
 def getrandom(vartype):
@@ -196,7 +192,7 @@ class MyProg(ProgOrganism):
 		}
 	conjunctions = {
 		'^' : _and,
-		'v' : _or
+#		'v' : _or
 		}
 	
 
@@ -204,7 +200,7 @@ class MyProg(ProgOrganism):
 	testVals = []
 	wrongTestVals = []
 	consts = [1.0, 2.0, 10.0]
-	numCases = 100
+	numCases = 500
 	
 	for j in range(1,numCases):
 		# first get a list of all the parameters and generate a random input for program
@@ -234,7 +230,7 @@ class MyProg(ProgOrganism):
 		#create a wrong testcase by mutating the original testcase
 		key = choice(testCase.keys())
 		wrongTestCase = testCase.copy()
-		wrongTestCase[key] = getrandom(type(wrongTestCase[key]))
+		wrongTestCase[key] = getrandom(type(key))
 		wrongTestVals.append(wrongTestCase)
 
 	#now take a testcase and insert the values in vars
@@ -254,12 +250,16 @@ class MyProg(ProgOrganism):
 	def fitness(self):
 		# choose 1000 random values
 		matches = 0
-		for correct, incorrect in zip(self.testVals, self.wrongTestVals):
-			if self.calc(**correct) == 1 and self.calc(**incorrect) == 0:
-				matches += 2
-			elif self.calc(**correct) == 1:
+		testcases = 0
+		for vars in self.testVals:
+			testcases = testcases + 1
+			if self.calc(**vars) == 1:
 				matches += 1
-		return (200 - matches)
+		for vars in self.wrongTestVals:
+			testcases = testcases + 1
+			if self.calc(**vars) == 0:
+				matches += 1
+		return testcases - matches
 		
 	# maximum tree depth when generating randomly
 	initDepth = 6
@@ -275,10 +275,6 @@ class ProgPop(Population):
 
 	# number of children to create after each generation
 	childCount = 200
-
-	incest = 20
-
-	numNewOrganisms = 20
 
 	mutants = 0.3
 
@@ -302,7 +298,7 @@ def main(nfittest=10, nkids=100):
 		if b.fitness() <= 0:
 			print "a perfect invariant found"
 			b.dump()
-		if pop.fitness() <= 0:
+		if pop.fitness() == 0:
 			print "the whole population consists of perfect invariants"
 			for organism in pop.organisms:
 				organism.dump()
@@ -310,12 +306,9 @@ def main(nfittest=10, nkids=100):
 		i += 1
 		ngens += 1
 		
-		if ngens < 3:
-			pop.gen()
-		else:
-			for organism in pop.organisms:
-				organism.dump()
-			break
+		#if ngens < 100:
+		pop.gen()
+		#else:
 			#print "failed after 100 generations, restarting"
 			#pop = ProgPop()
 			#ngens = 0

@@ -29,12 +29,12 @@ def flipCoin():
     
 def flipType(type):
     if type == 0:
-        if flipCoin():
-            return 1
-        else:
-            return 0
+		if flipCoin():
+			return 1
+		else:
+			return 0
     else:
-        return 2
+		return 2
 
 #@-node:imports
 #@+node:class BaseNode
@@ -74,7 +74,7 @@ class FuncNode(BaseNode):
                 funcList = org.arithfuncsList
             elif type == boolean:
                 funcList = org.boolfuncsList
-            else:
+            elif type == conjunction:
                 funcList = org.conjunctionsList
             name, func, nargs = choice(funcList)
         else:
@@ -88,7 +88,7 @@ class FuncNode(BaseNode):
         
         # and fill in the args, from given, or randomly
         if not children:
-            children = [org.genNode(flipType(type), depth+1) for i in xrange(nargs)]
+            children = [org.genNode(depth+1, flipType(type)) for i in xrange(nargs)]
     
         self.name = name
         self.func = func
@@ -218,22 +218,9 @@ class FuncNode(BaseNode):
                 child.mutate(depth+1)
                 return
     
-        # mutate this node - with a chance of less than 1 in 3 mutate the function of this node or replace one of its children
-        if random() < 0.33:
-            if self.type == arithmetic:
-                funcList = self.org.arithfuncsList
-            elif self.type == boolean:
-                funcList = self.org.boolfuncsList
-            else:
-                funcList = self.org.conjunctionsList
-            name, func, nargs = choice(funcList)
-            if nargs == self.nargs:
-                self.func = func
-                self.name = name
-                return
+        # mutate this node - replace one of its children
         mutIdx = randrange(0, self.nargs)
-        self.children[mutIdx] = self.org.genNode(self.children[mutIdx].type, depth+1)
-        
+        self.children[mutIdx] = self.org.genNode(depth+1, self.children[mutIdx].type)
     
         #print "mutate: depth=%s" % depth
     
@@ -443,7 +430,7 @@ class ProgOrganism(BaseOrganism):
         self.fitness_cache = None
 
         if root == None:
-            root = self.genNode(flipType(0))
+            root = self.genNode()
     
         self.tree = root
     
@@ -466,6 +453,7 @@ class ProgOrganism(BaseOrganism):
         # and return both progeny
         child1 = self.__class__(ourRootCopy)
         child2 = self.__class__(mateRootCopy)
+    
         return (child1, child2)
     
     #@-node:mate
@@ -525,7 +513,7 @@ class ProgOrganism(BaseOrganism):
     
     #@-node:dump
     #@+node:genNode
-    def genNode(self, type, depth=1):
+    def genNode(self, depth=1, type = flipType(conjunction)):
         """
         Randomly generates a node to build in
         to this organism
@@ -606,7 +594,7 @@ class ProgOrganism(BaseOrganism):
 
 #@-node:class ProgOrganism
 #@+node:funcs
-        
+		
 #@-node:flipCoin
 #@-others
 
