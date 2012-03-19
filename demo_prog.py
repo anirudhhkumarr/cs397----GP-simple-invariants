@@ -268,17 +268,17 @@ class MyProg(ProgOrganism):
 class ProgPop(Population):
 	
 	species = MyProg
-	initPopulation = 100
+	initPopulation = 1000
 	
 	# cull to this many children after each generation
-	childCull = 200
+	childCull = 2000
 
 	# number of children to create after each generation
-	childCount = 200
+	childCount = 2000
 
-	incest = 20
+	incest = 50
 
-	numNewOrganisms = 20
+	numNewOrganisms = 50
 
 	mutants = 0.3
 
