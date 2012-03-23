@@ -41,34 +41,40 @@ from pygene.population import Population
 def add(x,y):
 	#print "add: x=%s y=%s" % (repr(x), repr(y))
 	try:
-		return x+y
+		return x[0] + y[0]
 	except:
 		#raise
-		return x
+		return x[0]
 
 def sub(x,y):
 	#print "sub: x=%s y=%s" % (repr(x), repr(y))
 	try:
-		return x-y
+		return x[0] - y[0]
 	except:
 		#raise
-		return x
+		return x[0]
 
 def mul(x,y):
 	#print "mul: x=%s y=%s" % (repr(x), repr(y))
 	try:
-		return x*y
+		return x[0] * y[0]
 	except:
 		#raise
-		return x
+		return x[0]
 
 def div(x,y):
 	#print "div: x=%s y=%s" % (repr(x), repr(y))
 	try:
-		return x / y
+		return x[0] / y[0]
 	except:
 		#raise
-		return x
+		return x[0]
+		
+def _geti(a, i):
+	try:
+		return a[i[0]];
+	except:
+		raise incompatibleTypes
 
 def _and(x,y):
 	try:
@@ -90,84 +96,103 @@ def _not(x):
 		
 def equal(x, y):
 	try:
-		return x == y
+		return x[0] == y[0]
+	except:
+		raise incompatibleTypes
+		
+def implies(x, y):
+	try:
+		return not x or y
 	except:
 		raise incompatibleTypes
 		
 def lt(x, y):
 	try:
-		return x < y
+		return x[0] < y[0]
 	except:
 		raise incompatibleTypes
 
 def gt(x, y):
 	try:
-		return x > y
+		return x[0] > y[0]
 	except:
 		raise incompatibleTypes
 
+def exists(expression, values, i):
+	try:
+		result = [evaluate(expression, values, j) for j in range(0,i)]
+		return 
+	except:
+		raise
+	
+def forall(expression, values, i):
+	try:
+		result = [evaluate(expression, values, j) for j in range(0,i)]
+		return 
+	except:
+		raise
+	
 def sqrt(x):
 	#print "sqrt: x=%s" % repr(x)
 	try:
-		return math.sqrt(x)
+		return math.sqrt(x[0])
 	except:
 		#raise
-		return x
+		return x[0]
 
 def pow(x,y):
 	#print "pow: x=%s y=%s" % (repr(x), repr(y))
 	try:
-		return x ** y
+		return x[0] ** y[0]
 	except:
 		#raise
-		return x
+		return x[0]
 
 def log(x):
 	#print "log: x=%s" % repr(x)
 	try:
-		return math.log(float(x))
+		return math.log(float(x[0]))
 	except:
 		#raise
-		return x
+		return x[0]
 
 def sin(x):
 	#print "sin: x=%s" % repr(x)
 	try:
-		return math.sin(float(x))
+		return math.sin(float(x[0]))
 	except:
 		#raise
-		return x
+		return x[0]
 	
 def cos(x):
 	#print "cos: x=%s" % repr(x)
 	try:
-		return math.cos(float(x))
+		return math.cos(float(x[0]))
 	except:
 		#raise
-		return x
+		return x[0]
 		
 def tan(x):
 	#print "tan: x=%s" % repr(x)
 	try:
-		return math.tan(float(x))
+		return math.tan(float(x[0]))
 	except:
 		#raise
-		return x
+		return x[0]
 
-params = [1, 2, 3, 4] #enter the program input parameters as a single list
+params = [1, 3] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
 	#enter the program or function here
-	p[0] = p[0] + p[1]
-	if p[0] < p[2]:
-		a = p[2]
-	else:
-		a = p[3]
+	i = 0
+	while p[0] < p[1]:
+		i += 1
+		p[0] += 1
 	return locals() #return all the local variables in current scope
 	
 def getrandom(vartype):
 	if vartype is int or vartype is long or vartype is float:
-		return randint(-10, 10)
+		return [randint(-10, 10)]
 	elif vartype is list:
 		return [randint(-10, 10)\
 				for i in xrange(randint(1,10))]
@@ -191,19 +216,25 @@ class MyProg(ProgOrganism):
 	boolfuncs = {
 		'=' : equal,
 		'<' : lt,
-		'>' : gt
-#		'!' : _not
+		'>' : gt,
 		}
 	conjunctions = {
 		'^' : _and,
-		'v' : _or
+#		'v' : _or,
+		'!' : _not
 		}
-	
+	array = {
+		'[]': geti
+	}
+	quantifiers = {
+		'Ei' : exists,
+		'Vi' : forall
+	}
 
 	vars = []
 	testVals = []
 	wrongTestVals = []
-	consts = [1.0, 2.0, 10.0]
+	consts = [1]
 	numCases = 100
 	
 	for j in range(1,numCases):
@@ -262,23 +293,21 @@ class MyProg(ProgOrganism):
 		return (200 - matches)
 		
 	# maximum tree depth when generating randomly
-	initDepth = 6
+	initDepth = 3
 
 # now create the population class
 class ProgPop(Population):
 	
 	species = MyProg
-	initPopulation = 1000
+	initPopulation = 100
 	
 	# cull to this many children after each generation
-	childCull = 2000
+	childCull = 200
 
 	# number of children to create after each generation
-	childCount = 2000
+	childCount = 200
 
 	incest = 50
-
-	numNewOrganisms = 50
 
 	mutants = 0.3
 

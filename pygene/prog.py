@@ -174,7 +174,7 @@ class FuncNode(BaseNode):
         # if child is a terminal, we *must* split here.
         # if child is not terminal, randomly choose whether
         # to split here
-        if random() < 0.33 \
+        if (random() < 0.33 and childToSplit.type != type)\
                 or isinstance(childToSplit, TerminalNode):
     
             # split at this node, and just copy the kids
@@ -455,9 +455,9 @@ class ProgOrganism(BaseOrganism):
         """
         # get copy of self, plus fragment and location details
         ourRootCopy, ourFrag, ourList, ourIdx = self.split()
-    
+        
         # ditto for mate
-        mateRootCopy, mateFrag, mateList, mateIdx = mate.split()
+        mateRootCopy, mateFrag, mateList, mateIdx = mate.split(ourFrag.type)
     
         # swap the fragments
         ourList[ourIdx] = mateFrag
@@ -482,7 +482,7 @@ class ProgOrganism(BaseOrganism):
     
     #@-node:mutate
     #@+node:split
-    def split(self):
+    def split(self, type = None):
         """
         support for recombination, returns a tuple
         with four values:

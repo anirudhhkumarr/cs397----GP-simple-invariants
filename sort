@@ -1,0 +1,199 @@
+{'p0.orig': 6, 'p1.new': 6, 'p0.new': -2, 'p1.orig': -2}
+{'p0.orig': 6, 'p1.new': 6, 'p0.new': -2, 'p1.orig': 4}
+['p0.orig', 'p1.new', 'p0.new', 'p1.orig']
+organism:
+  =
+    +
+      {p1.new}
+      {p0.new}
+    +
+      {p0.new}
+      {p0.orig}
+generation 0: <MyProg:83> best=83 average=176)
+organism:
+  =
+    {p1.orig}
+    {p0.new}
+generation 1: <MyProg:73> best=73 average=138)
+organism:
+  =
+    +
+      {p0.orig}
+      {p1.orig}
+    +
+      {p0.new}
+      {p1.new}
+generation 2: <MyProg:55> best=55 average=114)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 3: <MyProg:55> best=55 average=96)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 4: <MyProg:55> best=55 average=93)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 5: <MyProg:55> best=55 average=86)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 6: <MyProg:55> best=55 average=85)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 7: <MyProg:55> best=55 average=83)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 8: <MyProg:55> best=55 average=84)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 9: <MyProg:55> best=55 average=83)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 10: <MyProg:55> best=55 average=82)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 11: <MyProg:55> best=55 average=81)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 12: <MyProg:55> best=55 average=82)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 13: <MyProg:55> best=55 average=80)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 14: <MyProg:55> best=55 average=81)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 15: <MyProg:55> best=55 average=80)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 16: <MyProg:55> best=55 average=80)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 17: <MyProg:55> best=55 average=80)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 18: <MyProg:55> best=55 average=81)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 19: <MyProg:55> best=55 average=80)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 20: <MyProg:55> best=55 average=81)
+organism:
+  =
+    +
+      {p0.new}
+      {p1.new}
+    +
+      {p0.orig}
+      {p1.orig}
+generation 21: <MyProg:55> best=55 average=81)
+
+

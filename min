@@ -1,0 +1,329 @@
+{'a': -6, 'p0': -6, 'p1': -2}
+{'a': -6, 'p0': -6, 'p1': 7}
+['a', 'p0', 'p1']
+organism:
+  >
+    +
+      {p1}
+      {p0}
+    +
+      {a}
+      {a}
+generation 0: <MyProg:75> best=75 average=170)
+organism:
+  >
+    +
+      {p1}
+      {p0}
+    +
+      {a}
+      {a}
+generation 1: <MyProg:75> best=75 average=128)
+organism:
+  >
+    +
+      {p1}
+      {p0}
+    +
+      {a}
+      {a}
+generation 2: <MyProg:75> best=75 average=110)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 3: <MyProg:57> best=57 average=103)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 4: <MyProg:57> best=57 average=100)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 5: <MyProg:57> best=57 average=99)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 6: <MyProg:57> best=57 average=99)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 7: <MyProg:57> best=57 average=99)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 8: <MyProg:57> best=57 average=99)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 9: <MyProg:57> best=57 average=99)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 10: <MyProg:57> best=57 average=98)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 11: <MyProg:57> best=57 average=98)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 12: <MyProg:57> best=57 average=98)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 13: <MyProg:57> best=57 average=98)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 14: <MyProg:57> best=57 average=98)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 15: <MyProg:57> best=57 average=98)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 16: <MyProg:57> best=57 average=98)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 17: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 18: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 19: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 20: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 21: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 22: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 23: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 24: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 25: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 26: <MyProg:57> best=57 average=96)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 27: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 28: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 29: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 30: <MyProg:57> best=57 average=96)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 31: <MyProg:57> best=57 average=96)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 32: <MyProg:57> best=57 average=97)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 33: <MyProg:57> best=57 average=96)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 34: <MyProg:57> best=57 average=96)
+organism:
+  v
+    <
+      {p1}
+      {p0}
+    =
+      {p0}
+      {a}
+generation 35: <MyProg:57> best=57 average=96)
+
+

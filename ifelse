@@ -1,0 +1,442 @@
+{'a': 7, 'p2': 0, 'p0': 7, 'p1': 5, 'p3': 7}
+{'a': 7, 'p2': 0, 'p0': 7, 'p1': 5, 'p3': -8}
+['a', 'p2', 'p0', 'p1', 'p3']
+organism:
+  =
+    +
+      {p0}
+      {a}
+    +
+      {p0}
+      {p2}
+generation 0: <MyProg:127> best=127 average=171)
+organism:
+  =
+    {a}
+    {a}
+generation 1: <MyProg:101> best=101 average=138)
+organism:
+  =
+    {a}
+    {a}
+generation 2: <MyProg:101> best=101 average=128)
+organism:
+  =
+    v
+      {a}
+      {p2}
+    {a}
+generation 3: <MyProg:100> best=100 average=126)
+organism:
+  =
+    v
+      {a}
+      {p2}
+    {a}
+generation 4: <MyProg:100> best=100 average=120)
+organism:
+  =
+    v
+      {a}
+      {p2}
+    {a}
+generation 5: <MyProg:100> best=100 average=117)
+organism:
+  =
+    v
+      {a}
+      {p2}
+    {a}
+generation 6: <MyProg:100> best=100 average=118)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    >
+      +
+        {p2}
+        {a}
+      <
+        {p0}
+        {p2}
+generation 7: <MyProg:94> best=94 average=116)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    >
+      +
+        {p2}
+        {a}
+      <
+        {p0}
+        {p2}
+generation 8: <MyProg:94> best=94 average=114)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    >
+      +
+        {p2}
+        {a}
+      <
+        {p0}
+        {p2}
+generation 9: <MyProg:94> best=94 average=115)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    <
+      {p0}
+      {p2}
+generation 10: <MyProg:78> best=78 average=114)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    <
+      {p0}
+      {p2}
+generation 11: <MyProg:78> best=78 average=112)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    <
+      {p0}
+      {p2}
+generation 12: <MyProg:78> best=78 average=111)
+organism:
+  v
+    >
+      {p2}
+      {p0}
+    =
+      {a}
+      {p3}
+generation 13: <MyProg:78> best=78 average=108)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    =
+      {a}
+      {p2}
+generation 14: <MyProg:63> best=63 average=106)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    =
+      {a}
+      {p2}
+generation 15: <MyProg:63> best=63 average=104)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    =
+      {a}
+      {p2}
+generation 16: <MyProg:63> best=63 average=104)
+organism:
+  v
+    =
+      {a}
+      {p2}
+    =
+      {a}
+      {p3}
+generation 17: <MyProg:63> best=63 average=102)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    =
+      {p2}
+      {a}
+generation 18: <MyProg:63> best=63 average=99)
+organism:
+  v
+    =
+      {a}
+      {p2}
+    =
+      {a}
+      {p3}
+generation 19: <MyProg:63> best=63 average=100)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    =
+      {a}
+      {p2}
+generation 20: <MyProg:63> best=63 average=101)
+organism:
+  v
+    =
+      {a}
+      {p2}
+    =
+      {a}
+      {p3}
+generation 21: <MyProg:63> best=63 average=103)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    =
+      {a}
+      {p2}
+generation 22: <MyProg:63> best=63 average=105)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    =
+      {a}
+      {p2}
+generation 23: <MyProg:63> best=63 average=101)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    =
+      {a}
+      {p2}
+generation 24: <MyProg:63> best=63 average=103)
+organism:
+  v
+    =
+      {p3}
+      {a}
+    =
+      {a}
+      {p2}
+generation 25: <MyProg:63> best=63 average=101)
+organism:
+  v
+    =
+      {p2}
+      {a}
+    =
+      {a}
+      {p3}
+generation 26: <MyProg:63> best=63 average=101)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {p2}
+      {a}
+generation 27: <MyProg:63> best=63 average=101)
+organism:
+  v
+    =
+      {p2}
+      {a}
+    =
+      {a}
+      {p3}
+generation 28: <MyProg:63> best=63 average=99)
+organism:
+  v
+    =
+      {p2}
+      {a}
+    =
+      {a}
+      {p3}
+generation 29: <MyProg:63> best=63 average=97)
+organism:
+  v
+    =
+      {p2}
+      {a}
+    =
+      {a}
+      {p3}
+generation 30: <MyProg:63> best=63 average=101)
+organism:
+  v
+    =
+      {p2}
+      {a}
+    =
+      {a}
+      {p3}
+generation 31: <MyProg:63> best=63 average=102)
+organism:
+  v
+    =
+      {p2}
+      {a}
+    =
+      {a}
+      {p3}
+generation 32: <MyProg:63> best=63 average=98)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {p2}
+      {a}
+generation 33: <MyProg:63> best=63 average=97)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {p2}
+      {a}
+generation 34: <MyProg:63> best=63 average=98)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {p2}
+      {a}
+generation 35: <MyProg:63> best=63 average=99)
+organism:
+  v
+    =
+      {p2}
+      {a}
+    =
+      {p3}
+      {a}
+generation 36: <MyProg:63> best=63 average=99)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {a}
+      {p2}
+generation 37: <MyProg:63> best=63 average=98)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {a}
+      {p2}
+generation 38: <MyProg:63> best=63 average=99)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {a}
+      {p2}
+generation 39: <MyProg:63> best=63 average=96)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {a}
+      {p2}
+generation 40: <MyProg:63> best=63 average=97)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {a}
+      {p2}
+generation 41: <MyProg:63> best=63 average=95)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {p2}
+      {a}
+generation 42: <MyProg:63> best=63 average=98)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {a}
+      {p2}
+generation 43: <MyProg:63> best=63 average=98)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {a}
+      {p2}
+generation 44: <MyProg:63> best=63 average=101)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {p2}
+      {a}
+generation 45: <MyProg:63> best=63 average=97)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {p2}
+      {a}
+generation 46: <MyProg:63> best=63 average=97)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {p2}
+      {a}
+generation 47: <MyProg:63> best=63 average=98)
+organism:
+  v
+    =
+      {a}
+      {p3}
+    =
+      {p2}
+      {a}
+generation 48: <MyProg:63> best=63 average=101)
+
+

@@ -1,0 +1,369 @@
+	p[2] = p[1]
+	p[1] = p[0]
+
+
+{'p0': 1, 'p2.orig': 3, 'p1.orig': -9, 'p1.new': 1, 'p2.new': -9}
+{'p2.new': 0, 'p0': 1, 'p1.new': 1, 'p2.orig': 3, 'p1.orig': -9}
+['p0', 'p2.orig', 'p1.orig', 'p1.new', 'p2.new']
+organism:
+  v
+    =
+      {p0}
+      {p0}
+    ^
+      {p2.orig}
+      {p2.new}
+generation 0: <MyProg:101> best=101 average=177)
+organism:
+  =
+    {p0}
+    {p1.new}
+generation 1: <MyProg:64> best=64 average=139)
+organism:
+  =
+    {p1.new}
+    {p0}
+generation 2: <MyProg:64> best=64 average=131)
+organism:
+  =
+    {p1.new}
+    {p0}
+generation 3: <MyProg:64> best=64 average=124)
+organism:
+  =
+    {p0}
+    {p1.new}
+generation 4: <MyProg:64> best=64 average=115)
+organism:
+  =
+    {p0}
+    {p1.new}
+generation 5: <MyProg:64> best=64 average=114)
+organism:
+  =
+    {p1.new}
+    {p0}
+generation 6: <MyProg:64> best=64 average=107)
+organism:
+  =
+    {p1.new}
+    {p0}
+generation 7: <MyProg:64> best=64 average=101)
+organism:
+  =
+    {p1.new}
+    {p0}
+generation 8: <MyProg:64> best=64 average=102)
+organism:
+  =
+    {p0}
+    {p1.new}
+generation 9: <MyProg:64> best=64 average=97)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 10: <MyProg:41> best=41 average=94)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 11: <MyProg:41> best=41 average=95)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 12: <MyProg:41> best=41 average=93)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 13: <MyProg:41> best=41 average=91)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 14: <MyProg:41> best=41 average=93)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 15: <MyProg:41> best=41 average=91)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 16: <MyProg:41> best=41 average=87)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 17: <MyProg:41> best=41 average=87)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 18: <MyProg:41> best=41 average=87)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 19: <MyProg:41> best=41 average=87)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 20: <MyProg:41> best=41 average=88)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 21: <MyProg:41> best=41 average=84)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 22: <MyProg:41> best=41 average=83)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 23: <MyProg:41> best=41 average=82)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 24: <MyProg:41> best=41 average=90)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 25: <MyProg:41> best=41 average=79)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 26: <MyProg:41> best=41 average=77)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 27: <MyProg:41> best=41 average=75)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 28: <MyProg:41> best=41 average=81)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 29: <MyProg:41> best=41 average=76)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 30: <MyProg:41> best=41 average=77)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 31: <MyProg:41> best=41 average=73)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 32: <MyProg:41> best=41 average=82)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 33: <MyProg:41> best=41 average=81)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 34: <MyProg:41> best=41 average=78)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 35: <MyProg:41> best=41 average=78)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 36: <MyProg:41> best=41 average=83)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 37: <MyProg:41> best=41 average=92)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 38: <MyProg:41> best=41 average=79)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 39: <MyProg:41> best=41 average=84)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 40: <MyProg:41> best=41 average=82)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 41: <MyProg:41> best=41 average=82)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 42: <MyProg:41> best=41 average=80)
+organism:
+  ^
+    =
+      {p1.orig}
+      {p2.new}
+    =
+      {p0}
+      {p1.new}
+generation 43: <MyProg:41> best=41 average=84)
+
+
