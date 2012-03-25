@@ -129,7 +129,7 @@ def forall(expr, **vars):
 	except:
 		return return_val
 	
-def exists(expression, **vars):
+def exists(expr, **vars):
 	try:
 		return_val = False
 		i = 0
