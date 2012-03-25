@@ -12,7 +12,7 @@ from math import sqrt
 from organism import BaseOrganism
 
 from xmlio import PGXmlMixin
-
+quantifier = -1
 conjunction = 0
 boolean = 1
 arithmetic = 2
@@ -56,6 +56,50 @@ class BaseNode:
 
 #@-node:class BaseNode
 #@+node:class FuncNode
+class QuantNode(BaseNode):
+	"""
+    node which holds a quantifier and its argument nodes
+    """
+	def __init__(self, org, depth, type = quantifier, name=None, children=None):
+		"""
+        creates this quantifier node
+        """
+        self.org = org
+        
+        if name = None:
+			name, func, nargs = choice(org.quantifierList)
+		else:
+			func, nargs = org.quantifierDict[name]
+			
+		if not children:
+            children = [org.genNode(flipType(type), depth+1)]
+            
+        self.name = name
+        self.func = func
+        self.nargs = nargs
+        self.children = children
+        self.type = type
+        
+	def calc(self, **vars):
+		"""
+        evaluates this node, plugging vars into
+        the nodes
+        """
+        args = []
+        for child in self.children:
+            args.append(child)
+        return self.func(*args, **vars)
+		
+	def dump(self, level=0):
+		indents = "  " * level
+        #print indents + "func:" + self.name
+        print "%s%s" % (indents, self.name)
+        for child in self.children:
+            child.dump(level+1)
+            
+	def copy(self, doSplit=False):
+	def mutate(self, depth):
+		
 class FuncNode(BaseNode):
     """
     node which holds a function and its argument nodes

@@ -70,7 +70,7 @@ def div(x,y):
 		#raise
 		return x[0]
 		
-def _geti(a, i):
+def geti(a, i):
 	try:
 		return a[i[0]];
 	except:
@@ -118,19 +118,27 @@ def gt(x, y):
 	except:
 		raise incompatibleTypes
 
-def exists(expression, values, i):
+def forall(expr, **vars):
 	try:
-		result = [evaluate(expression, values, j) for j in range(0,i)]
-		return 
+		return_val = True
+		i = 0
+		while True:
+			vars['i'] = i
+			i += 1
+			return_val = return_val and expr.calc(**vars)
 	except:
-		raise
+		return return_val
 	
-def forall(expression, values, i):
+def exists(expression, **vars):
 	try:
-		result = [evaluate(expression, values, j) for j in range(0,i)]
-		return 
+		return_val = False
+		i = 0
+		while True:
+			vars['i'] = i
+			i += 1
+			return_val = return_val or expr.calc(**vars)
 	except:
-		raise
+		return return_val
 	
 def sqrt(x):
 	#print "sqrt: x=%s" % repr(x)
@@ -243,7 +251,7 @@ class MyProg(ProgOrganism):
 		testCase = {}
 		wrongTestCase = {}
 		for i in params:
-			testParams.append(getrandom(type(i)))
+			testParams.append(getrandom(i))
 		origParams = testParams[:]
 		
 		# insert all the local variables encountered while running the program in testCase
