@@ -28,6 +28,11 @@ def flipCoin():
     return choice((True, False))
     
 def flipType(type):
+    if type == -1:
+        if flipCoin():
+            return 0
+        else:
+            return -1      
     if type == 0:
         if flipCoin():
             return 1
@@ -57,22 +62,22 @@ class BaseNode:
 #@-node:class BaseNode
 #@+node:class FuncNode
 class QuantNode(BaseNode):
-	"""
+    """
     node which holds a quantifier and its argument nodes
     """
-	def __init__(self, org, depth, type = quantifier, name=None, children=None):
-		"""
+    def __init__(self, org, depth, type = quantifier, name=None, children=None):
+        """
         creates this quantifier node
         """
         self.org = org
         
-        if name = None:
-			name, func, nargs = choice(org.quantifierList)
-		else:
-			func, nargs = org.quantifierDict[name]
-			
-		if not children:
-            children = [org.genNode(flipType(type), depth+1)]
+        if name == None:
+            name, func, nargs = choice(org.quantifierList)
+        else:
+            func, nargs = org.quantifierDict[name]
+            
+        if not children:
+            children = [org.genNode(0, depth+1)]
             
         self.name = name
         self.func = func
@@ -80,8 +85,8 @@ class QuantNode(BaseNode):
         self.children = children
         self.type = type
         
-	def calc(self, **vars):
-		"""
+    def calc(self, **vars):
+        """
         evaluates this node, plugging vars into
         the nodes
         """
@@ -89,17 +94,17 @@ class QuantNode(BaseNode):
         for child in self.children:
             args.append(child)
         return self.func(*args, **vars)
-		
-	def dump(self, level=0):
-		indents = "  " * level
+        
+    def dump(self, level=0):
+        indents = "  " * level
         #print indents + "func:" + self.name
         print "%s%s" % (indents, self.name)
         for child in self.children:
             child.dump(level+1)
             
-	def copy(self, doSplit=False):
-	def mutate(self, depth):
-		
+    #def copy(self, doSplit=False):
+    #def mutate(self, depth):
+        
 class FuncNode(BaseNode):
     """
     node which holds a function and its argument nodes
@@ -415,6 +420,7 @@ class ProgOrganismMetaclass(type):
         arithfuncs = dict['arithfuncs']
         boolfuncs = dict['boolfuncs']
         conjunctions = dict['conjunctions']
+        quantifiers = dict['quantifiers']
         consts = dict['consts']
         vars = dict['vars']
         
@@ -425,6 +431,8 @@ class ProgOrganismMetaclass(type):
         boolfuncsDict = {}
         conjunctionsList = []
         conjunctionsDict = {}
+        quantifierList = []
+        quantifierDict ={}
         
         for name, func in arithfuncs.items():
             arithfuncsList.append((name, func, func.func_code.co_argcount))
@@ -435,13 +443,18 @@ class ProgOrganismMetaclass(type):
         for name, func in conjunctions.items():
             conjunctionsList.append((name, func, func.func_code.co_argcount))
             conjunctionsDict[name] = (func, func.func_code.co_argcount)
-    
+        for name, func in quantifiers.items():
+            quantifierList.append((name, func, func.func_code.co_argcount))
+            quantifierDict[name] = (func, func.func_code.co_argcount)
+            
         cls.arithfuncsList = arithfuncsList
         cls.arithfuncsDict = arithfuncsDict
         cls.boolfuncsList = boolfuncsList
         cls.boolfuncsDict = boolfuncsDict
         cls.conjunctionsList = conjunctionsList
         cls.conjunctionsDict = conjunctionsDict
+        cls.quantifierList = quantifierList
+        cls.quantifierDict = quantifierDict
     
     #@-node:__init__
     #@-others
@@ -467,6 +480,7 @@ class ProgOrganism(BaseOrganism):
     arithfuncs = {}
     boolfuncs = {}
     conjunctions = {}
+    quantifiers = {}
     vars = []
     consts = []
     
@@ -487,7 +501,7 @@ class ProgOrganism(BaseOrganism):
         self.fitness_cache = None
 
         if root == None:
-            root = self.genNode(flipType(0))
+            root = self.genNode(flipType(-1))
     
         self.tree = root
     
@@ -584,7 +598,7 @@ class ProgOrganism(BaseOrganism):
                 #return ConstNode(self)
     
         # either root, or not maxed, or 50-50 chance
-        return FuncNode(self, depth, type)
+        return QuantNode(self, depth, type)
     
     #@-node:genNode
     #@+node:xmlDumpSelf
