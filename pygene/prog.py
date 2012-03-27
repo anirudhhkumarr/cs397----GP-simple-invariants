@@ -29,10 +29,7 @@ def flipCoin():
     
 def flipType(type):
     if type == -1:
-        if flipCoin():
-            return 0
-        else:
-            return -1      
+        return 0
     if type == 0:
         if flipCoin():
             return 1
@@ -65,7 +62,7 @@ class QuantNode(BaseNode):
     """
     node which holds a quantifier and its argument nodes
     """
-    def __init__(self, org, depth, type = quantifier, name=None, children=None):
+    def __init__(self, org, depth, type=quantifier, name=None, children=None):
         """
         creates this quantifier node
         """
@@ -83,7 +80,7 @@ class QuantNode(BaseNode):
         self.func = func
         self.nargs = nargs
         self.children = children
-        self.type = type
+        self.type = -1
         
     def calc(self, **vars):
         """
@@ -102,8 +99,111 @@ class QuantNode(BaseNode):
         for child in self.children:
             child.dump(level+1)
             
-    #def copy(self, doSplit=False):
-    #def mutate(self, depth):
+    def copy(self, doSplit=False):
+        """
+        Copies this node and recursively its children, returning
+        the copy
+    
+        if doSplit is true, then
+        cuts off a piece of the tree, to support
+        the recombination phase of mating with another program
+    
+        returns a quadruple:
+             - copy - a copy of this node
+             - fragment - fragment to be given to mate
+             - lst - list within copy tree to which fragment
+               from mate should be written
+             - idx - index within the lst at which the fragment
+               should be written
+    
+        if doSplit is false, then the last 3 tuple items will be None
+        """
+        if not doSplit:
+            # easy case - split has already occurred elsewhere
+            # within the tree, so just clone the kids without
+            # splitting
+            clonedChildren = \
+                [child.copy() for child in self.children]
+            fragment = None
+            lst = None
+            idx = None
+    
+            # now ready to instantiate clone
+            copy = QuantNode(self.org, 0, self.type, self.name, clonedChildren)
+            return copy
+    
+        # choose a child of this node that we might split
+        childIdx = randrange(0, self.nargs)
+        childToSplit = self.children[childIdx]
+    
+        # if child is a terminal, we *must* split here.
+        # if child is not terminal, randomly choose whether
+        # to split here
+        if (random() < 0.33 and childToSplit.type != type)\
+                or isinstance(childToSplit, TerminalNode):
+    
+            # split at this node, and just copy the kids
+            clonedChildren = \
+                [child.copy() for child in self.children]
+    
+            # now ready to instantiate clone
+            if self.type == -1:
+                copy = QuantNode(self.org, 0, self.type, self.name, clonedChildren)
+            else:
+                copy = FuncNode(self.org, 0, self.type, self.name, clonedChildren)
+    
+            return copy, childToSplit, self.children, childIdx
+        
+        else:
+            # delegate the split down to selected child
+            clonedChildren = []
+            for i in xrange(self.nargs):
+                child = self.children[i]
+                if (i == childIdx):
+                    # chosen child
+                    (clonedChild,fragment,lst,idx) = child.copy(True)
+                else:
+                    # just clone without splitting
+                    clonedChild = child.copy()
+                clonedChildren.append(clonedChild)
+    
+            # now ready to instantiate clone
+            if self.type == -1:
+                copy = QuantNode(self.org, 0, self.type, self.name, clonedChildren)
+            else:
+                copy = FuncNode(self.org, 0, self.type, self.name, clonedChildren)
+    
+            return copy, fragment, lst, idx
+    
+    #@-node:copy
+    #@+node:mutate
+    def mutate(self, depth):
+        """
+        randomly mutates either this tree, or a child
+        """
+        type = self.type
+        # 2 in 3 chance of mutating a child of this node
+        if random() > 0.33:
+            child = choice(self.children)
+            if not isinstance(child, TerminalNode):
+                child.mutate(depth+1)
+                return
+    
+        # mutate this node - with a chance of less than 1 in 3 mutate the function of this node or replace one of its children
+        if random() < 0.33:
+            if self.type == arithmetic:
+                funcList = self.org.arithfuncsList
+            elif self.type == boolean:
+                funcList = self.org.boolfuncsList
+            else:
+                funcList = self.org.conjunctionsList
+            name, func, nargs = choice(funcList)
+            if nargs == self.nargs:
+                self.func = func
+                self.name = name
+                return
+        mutIdx = randrange(0, self.nargs)
+        self.children[mutIdx] = self.org.genNode(self.children[mutIdx].type, depth+1)
         
 class FuncNode(BaseNode):
     """
@@ -501,7 +601,7 @@ class ProgOrganism(BaseOrganism):
         self.fitness_cache = None
 
         if root == None:
-            root = self.genNode(flipType(-1))
+            root = self.genNode(choice((0, -1)))
     
         self.tree = root
     

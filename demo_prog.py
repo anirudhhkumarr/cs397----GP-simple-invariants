@@ -122,7 +122,8 @@ def forall(expr, **vars):
     try:
         return_val = True
         i = 0
-        while True:
+        while i < 10:
+            
             vars['i'] = i
             i += 1
             return_val = return_val and expr.calc(**vars)
@@ -133,7 +134,7 @@ def exists(expr, **vars):
     try:
         return_val = False
         i = 0
-        while True:
+        while i < 10:
             vars['i'] = i
             i += 1
             return_val = return_val or expr.calc(**vars)
@@ -192,10 +193,8 @@ params = [1, 3] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
-    i = 0
-    while p[0] < p[1]:
-        i += 1
-        p[0] += 1
+    i=0
+    p[1] = p[1] - 1
     return locals() #return all the local variables in current scope
     
 def getrandom(var):
@@ -229,7 +228,7 @@ class MyProg(ProgOrganism):
     conjunctions = {
         '^' : _and,
 #       'v' : _or,
-        '!' : _not
+#        '!' : _not
         }
     array = {
         '[]': geti
@@ -243,10 +242,10 @@ class MyProg(ProgOrganism):
     testVals = []
     wrongTestVals = []
     consts = [1]
-    numCases = 100
-    
+    numCases = 100  
+            
     for j in range(1,numCases):
-        # first get a list of all the parameters and generate a random input for program
+        # now get a list of all the parameters and generate a random input for program
         testParams = []
         testCase = {}
         wrongTestCase = {}
@@ -256,24 +255,24 @@ class MyProg(ProgOrganism):
         
         # insert all the local variables encountered while running the program in testCase
         testCase = inputProgram(testParams)
-
-        #now check which input parameters have changed as a result running the program
+        del testCase['p']
+        key = choice(testCase.keys())
+        #now check which input parameters have changed as a result of running the program
         count = 0
         for i in testParams:
             if origParams[count] != i:
-                #print 'parameter changed'
+                #print 'parameter changed',origParams[count],i
                 testCase['p' + str(count) + '.orig'] = origParams[count]
                 testCase['p' + str(count) + '.new'] = i
             else:
                 testCase['p' + str(count)] = i
             count = count + 1
-        del testCase['p']
+        
         testVals.append(testCase)
         
         #create a wrong testcase by mutating the original testcase
-        key = choice(testCase.keys())
         wrongTestCase = testCase.copy()
-        wrongTestCase[key] = getrandom(type(wrongTestCase[key]))
+        wrongTestCase[key] = getrandom(wrongTestCase[key])
         wrongTestVals.append(wrongTestCase)
 
     #now take a testcase and insert the values in vars
@@ -318,7 +317,6 @@ class ProgPop(Population):
     incest = 50
 
     mutants = 0.3
-
 
 pop = ProgPop()
 
