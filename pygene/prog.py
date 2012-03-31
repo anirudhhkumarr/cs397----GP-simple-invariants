@@ -74,7 +74,7 @@ class QuantNode(BaseNode):
             func, nargs = org.quantifierDict[name]
             
         if not children:
-            children = [org.genNode(0, depth+1)]
+            children = [org.genNode(conjunction, depth+1)]
             
         self.name = name
         self.func = func
@@ -449,6 +449,7 @@ class ConstNode(TerminalNode):
 
 #@-node:class ConstNode
 #@+node:class VarNode
+
 class VarNode(TerminalNode):
     """
     Holds a variable
@@ -500,6 +501,57 @@ class VarNode(TerminalNode):
     #@-others
 
 #@-node:class VarNode
+
+class ArrayNode(TerminalNode):
+    """
+    Holds a Array derefrence
+    """
+    #@    @+others
+    #@+node:__init__
+    def __init__(self, org, name=None):
+        """
+        Inits this node as a array placeholder
+        """
+        self.org = org
+    
+        if name == None:
+            name = choice(org.arrays)
+        
+        self.name = name
+        self.type = terminal
+        
+    #@-node:__init__
+    #@+node:calc
+    def calc(self, **vars):
+        """
+        Calculates val of this node
+        """
+        val = arrays.get(self.name, 0.0)[vars.get('i', 0.0)]
+        #print "VarNode.calc: name=%s val=%s vars=%s" % (
+        #    self.name,
+        #    val,
+        #    vars,
+        #    )
+        return val
+    #@-node:calc
+    #@+node:dump
+    def dump(self, level=0):
+        
+        indents = "  " * level
+        #print indents + "var {" + self.name + "}"
+        print "%s{%s[i]}" % (indents, self.name)
+    
+    #@-node:dump
+    #@+node:copy
+    def copy(self):
+        """
+        clone this node
+        """
+        return ArrayNode(self.org, self.name)
+    
+    #@-node:copy
+    #@-others
+
 #@+node:class ProgOrganismMetaclass
 class ProgOrganismMetaclass(type):
     """
@@ -582,6 +634,7 @@ class ProgOrganism(BaseOrganism):
     conjunctions = {}
     quantifiers = {}
     vars = []
+    arrays = []
     consts = []
     
     # maximum tree depth when generating randomly
@@ -691,14 +744,17 @@ class ProgOrganism(BaseOrganism):
     
         if depth > 1 and (depth >= self.initDepth or (type == arithmetic and flipCoin()) or type > arithmetic):
             # not root, and either maxed depth, or 50-50 chance, or terminal node
-            #if flipCoin():
-                # choose a var
-            return VarNode(self)
-            #else:
-                #return ConstNode(self)
+            if flipCoin():
+                #choose a var
+                return VarNode(self)
+            else:
+                return ArrayNode(self)
     
         # either root, or not maxed, or 50-50 chance
-        return QuantNode(self, depth, type)
+        if depth <= 1:
+            return QuantNode(self, depth, -1)
+        else:
+            return FuncNode(self, depth, type)
     
     #@-node:genNode
     #@+node:xmlDumpSelf

@@ -122,8 +122,7 @@ def forall(expr, **vars):
     try:
         return_val = True
         i = 0
-        while i < 10:
-            
+        while i < 4:
             vars['i'] = i
             i += 1
             return_val = return_val and expr.calc(**vars)
@@ -134,7 +133,7 @@ def exists(expr, **vars):
     try:
         return_val = False
         i = 0
-        while i < 10:
+        while i < 4:
             vars['i'] = i
             i += 1
             return_val = return_val or expr.calc(**vars)
@@ -189,12 +188,14 @@ def tan(x):
         #raise
         return x[0]
 
-params = [1, 3] #enter the program input parameters as a single list
+params = [[1, 3, 2, 4]] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
-    i=0
-    p[1] = p[1] - 1
+    try:
+        index = p[0].index(1)
+    except ValueError:
+        index = -1
     return locals() #return all the local variables in current scope
     
 def getrandom(var):
@@ -239,6 +240,7 @@ class MyProg(ProgOrganism):
     }
 
     vars = []
+    arrays = []
     testVals = []
     wrongTestVals = []
     consts = [1]
@@ -275,11 +277,16 @@ class MyProg(ProgOrganism):
         wrongTestCase[key] = getrandom(wrongTestCase[key])
         wrongTestVals.append(wrongTestCase)
 
-    #now take a testcase and insert the values in vars
-    vars = testCase.keys()
+    #now take a testcase and insert the values in vars and arrays
+    for key, val in testCase.iteritems():
+        if type(val) is int or type(val) is long or type(val) is float:
+            vars.append(key)
+        if type(val) is list:
+            arrays.append(key)
     print testCase
     print wrongTestCase
     print vars
+    print arrays
     
     mutProb = 0.4
 
@@ -300,13 +307,14 @@ class MyProg(ProgOrganism):
         return (200 - matches)
         
     # maximum tree depth when generating randomly
-    initDepth = 3
+    initDepth = 4
 
 # now create the population class
 class ProgPop(Population):
     
     species = MyProg
     initPopulation = 100
+    
     
     # cull to this many children after each generation
     childCull = 200
