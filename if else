@@ -1,0 +1,128 @@
+^[[Aanirudh@HP:~/Acads/cs397/cs397----GP-simple-invariants$ python demo_prog.py 
+{'a': 1, 'p2': 6, 'p0': 1, 'p1': 1}
+{'a': -6, 'p2': 6, 'p0': 1, 'p1': 1}
+['a', 'p2', 'p0', 'p1']
+[]
+organism:
+  =
+    {p1}
+    {a}
+generation 0: <MyProg:84> best=84 average=154)
+organism:
+  !
+    >
+      {a}
+      {p1}
+generation 1: <MyProg:62> best=62 average=111)
+organism:
+  !
+    ^
+      !
+        =
+          {a}
+          {p2}
+      !
+        =
+          {a}
+          {p1}
+generation 2: <MyProg:15> best=15 average=108)
+organism:
+  !
+    ^
+      !
+        =
+          {a}
+          {p2}
+      !
+        =
+          {a}
+          {p1}
+generation 3: <MyProg:15> best=15 average=105)
+organism:
+  !
+    ^
+      !
+        =
+          {a}
+          {p2}
+      !
+        =
+          {a}
+          {p1}
+generation 4: <MyProg:15> best=15 average=107)
+organism:
+  !
+    ^
+      !
+        =
+          {a}
+          {p2}
+      !
+        =
+          {a}
+          {p1}
+generation 5: <MyProg:15> best=15 average=102)
+organism:
+  !
+    ^
+      !
+        =
+          {a}
+          {p2}
+      !
+        =
+          {a}
+          {p1}
+generation 6: <MyProg:15> best=15 average=108)
+organism:
+  !
+    ^
+      !
+        =
+          {a}
+          {p2}
+      !
+        =
+          {a}
+          {p1}
+generation 7: <MyProg:15> best=15 average=109)
+organism:
+  !
+    ^
+      !
+        =
+          {a}
+          {p2}
+      !
+        =
+          {a}
+          {p1}
+generation 8: <MyProg:15> best=15 average=106)
+organism:
+  !
+    ^
+      !
+        =
+          {a}
+          {p2}
+      !
+        =
+          {a}
+          {p1}
+generation 9: <MyProg:15> best=15 average=108)
+organism:
+  !
+    ^
+      !
+        =
+          {a}
+          {p2}
+      !
+        =
+          {a}
+          {p1}
+generation 10: <MyProg:15> best=15 average=103)
+^Z
+[4]+  Stopped                 python demo_prog.py
+anirudh@HP:~/Acads/cs397/cs397----GP-simple-invariants$ 
+

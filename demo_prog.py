@@ -39,288 +39,265 @@ from pygene.population import Population
 
 # a tiny batch of functions
 def add(x,y):
-	#print "add: x=%s y=%s" % (repr(x), repr(y))
-	try:
-		return x+y
-	except:
-		#raise
-		return x
+    #print "add: x=%s y=%s" % (repr(x), repr(y))
+    try:
+        return x+y
+    except:
+        #raise
+        return x
 
 def sub(x,y):
-	#print "sub: x=%s y=%s" % (repr(x), repr(y))
-	try:
-		return x-y
-	except:
-		#raise
-		return x
+    #print "sub: x=%s y=%s" % (repr(x), repr(y))
+    try:
+        return x-y
+    except:
+        #raise
+        return x
 
 def mul(x,y):
-	#print "mul: x=%s y=%s" % (repr(x), repr(y))
-	try:
-		return x*y
-	except:
-		#raise
-		return x
+    #print "mul: x=%s y=%s" % (repr(x), repr(y))
+    try:
+        return x*y
+    except:
+        #raise
+        return x
 
 def div(x,y):
-	#print "div: x=%s y=%s" % (repr(x), repr(y))
-	try:
-		return x / y
-	except:
-		#raise
-		return x
+    #print "div: x=%s y=%s" % (repr(x), repr(y))
+    try:
+        return x / y
+    except:
+        #raise
+        return x
 
 def _and(x,y):
-	try:
-		return x and y
-	except:
-		raise incompatibleTypes
+    try:
+        return x and y
+    except:
+        raise incompatibleTypes
 
 def _or(x,y):
-	try:
-		return x or y
-	except:
-		raise incompatibleTypes
-		
+    try:
+        return x or y
+    except:
+        raise incompatibleTypes
+
 def _not(x):
-	try:
-		return not x
-	except:
-		raise incompatibleTypes
-		
+    try:
+        return not x
+    except:
+        raise incompatibleTypes
+
 def equal(x, y):
-	try:
-		return x == y
-	except:
-		raise incompatibleTypes
-		
+    try:
+        return x == y
+    except:
+        raise incompatibleTypes
+
 def lt(x, y):
-	try:
-		return x < y
-	except:
-		raise incompatibleTypes
+    try:
+        return x < y
+    except:
+        raise incompatibleTypes
 
 def gt(x, y):
-	try:
-		return x > y
-	except:
-		raise incompatibleTypes
+    try:
+        return x > y
+    except:
+        raise incompatibleTypes
 
-def sqrt(x):
-	#print "sqrt: x=%s" % repr(x)
-	try:
-		return math.sqrt(x)
-	except:
-		#raise
-		return x
+def forall(expr, **vars):
+    try:
+        return_val = True
+        i = 0
+        while i < 4:
+            vars['i'] = i
+            i += 1
+            return_val = return_val and expr.calc(**vars)
+    except:
+        return return_val
 
-def pow(x,y):
-	#print "pow: x=%s y=%s" % (repr(x), repr(y))
-	try:
-		return x ** y
-	except:
-		#raise
-		return x
+def exists(expr, **vars):
+    try:
+        return_val = False
+        i = 0
+        while i < 4:
+            vars['i'] = i
+            i += 1
+            return_val = return_val or expr.calc(**vars)
+    except:
+        return return_val
 
-def log(x):
-	#print "log: x=%s" % repr(x)
-	try:
-		return math.log(float(x))
-	except:
-		#raise
-		return x
-
-def sin(x):
-	#print "sin: x=%s" % repr(x)
-	try:
-		return math.sin(float(x))
-	except:
-		#raise
-		return x
-	
-def cos(x):
-	#print "cos: x=%s" % repr(x)
-	try:
-		return math.cos(float(x))
-	except:
-		#raise
-		return x
-		
-def tan(x):
-	#print "tan: x=%s" % repr(x)
-	try:
-		return math.tan(float(x))
-	except:
-		#raise
-		return x
-
-params = [1, 2, 3, 4] #enter the program input parameters as a single list
+params = [1, 2, 3] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
-	#enter the program or function here
-	p[0] = p[0] + p[1]
-	if p[0] < p[2]:
-		a = p[2]
-	else:
-		a = p[3]
-	return locals() #return all the local variables in current scope
-	
-def getrandom(vartype):
-	if vartype is int or vartype is long or vartype is float:
-		return randint(-10, 10)
-	elif vartype is list:
-		return [randint(-10, 10)\
-				for i in xrange(randint(1,10))]
-		
+    #enter the program or function here
+    if p[0] < p[1]:
+        a = p[2]
+    else:
+        a = p[1]
+    return locals() #return all the local variables in current scope
+
+def getrandom(var):
+    if type(var) is int or type(var) is long or type(var) is float:
+        return randint(-10, 10)
+    elif type(var) is list:
+        return [randint(-10, 10)\
+                for i in xrange(len(var))]
+
 # define the class comprising the program organism
 class MyProg(ProgOrganism):
-	"""
-	"""
-	arithfuncs = {
-		'+' : add,
-#		'-' : sub,
-#		'*' : mul
-#		'/' :div,
-#		'**': pow,
-#		'sqrt': sqrt,
-#		'log' : log,
-#		'sin' : sin,
-#		'cos' : cos,
-#		'tan' : tan
-		}
-	boolfuncs = {
-		'=' : equal,
-		'<' : lt,
-		'>' : gt
-#		'!' : _not
-		}
-	conjunctions = {
-		'^' : _and,
-		'v' : _or
-		}
-	
+    """
+    """
+    arithfuncs = {
+        '+' : add,
+#       '-' : sub,
+#       '*' : mul
+#       '/' :div
+        }
+    boolfuncs = {
+        '=' : equal,
+        '<' : lt,
+        '>' : gt
+        }
+    conjunctions = {
+        '^' : _and,
+        '!' : _not
+        #'v' : _or
+        }
+    quantifiers = {
+        'Ei' : exists,
+        'Vi' : forall
+    }
 
-	vars = []
-	testVals = []
-	wrongTestVals = []
-	consts = [1.0, 2.0, 10.0]
-	numCases = 100
-	
-	for j in range(1,numCases):
-		# first get a list of all the parameters and generate a random input for program
-		testParams = []
-		testCase = {}
-		wrongTestCase = {}
-		for i in params:
-			testParams.append(getrandom(type(i)))
-		origParams = testParams[:]
-		
-		# insert all the local variables encountered while running the program in testCase
-		testCase = inputProgram(testParams)
+    vars = []
+    arrays = []
+    testVals = []
+    wrongTestVals = []
+    consts = [1.0, 2.0, 10.0]
+    numCases = 100
 
-		#now check which input parameters have changed as a result running the program
-		count = 0
-		for i in testParams:
-			if origParams[count] != i:
-				#print 'parameter changed'
-				testCase['p' + str(count) + '.orig'] = origParams[count]
-				testCase['p' + str(count) + '.new'] = i
-			else:
-				testCase['p' + str(count)] = i
-			count = count + 1
-		del testCase['p']
-		testVals.append(testCase)
-		
-		#create a wrong testcase by mutating the original testcase
-		key = choice(testCase.keys())
-		wrongTestCase = testCase.copy()
-		wrongTestCase[key] = getrandom(type(wrongTestCase[key]))
-		wrongTestVals.append(wrongTestCase)
+    for j in range(1,numCases):
+        # first get a list of all the parameters and generate a random input for program
+        testParams = []
+        testCase = {}
+        wrongTestCase = {}
+        for i in params:
+            testParams.append(getrandom(i))
+        origParams = testParams[:]
 
-	#now take a testcase and insert the values in vars
-	vars = testCase.keys()
-	print testCase
-	print wrongTestCase
-	print vars
-	
-	mutProb = 0.4
+        # insert all the local variables encountered while running the program in testCase
+        testCase = inputProgram(testParams)
+        del testCase['p']
+        key = choice(testCase.keys())
+        #now check which input parameters have changed as a result running the program
+        count = 0
+        for i in testParams:
+            if origParams[count] != i:
+                #print 'parameter changed'
+                testCase['p' + str(count) + '.orig'] = origParams[count]
+                testCase['p' + str(count) + '.new'] = i
+            else:
+                testCase['p' + str(count)] = i
+            count = count + 1
 
-	def testFunc(self, **vars):
-		"""
-		Just wanting to model x^2 + y
-		"""
-		return vars['c'] ** 2 + vars['b']
+        testVals.append(testCase)
 
-	def fitness(self):
-		# choose 1000 random values
-		matches = 0
-		for correct, incorrect in zip(self.testVals, self.wrongTestVals):
-			if self.calc(**correct) == 1 and self.calc(**incorrect) == 0:
-				matches += 2
-			elif self.calc(**correct) == 1:
-				matches += 1
-		return (200 - matches)
-		
-	# maximum tree depth when generating randomly
-	initDepth = 6
+        #create a wrong testcase by mutating the original testcase
+        wrongTestCase = testCase.copy()
+        wrongTestCase[key] = getrandom(wrongTestCase[key])
+        wrongTestVals.append(wrongTestCase)
+
+    #now take a testcase and insert the values in vars and arrays
+    for key, val in testCase.iteritems():
+        if type(val) is int or type(val) is long or type(val) is float:
+            vars.append(key)
+        if type(val) is list:
+            arrays.append(key)
+    print testCase
+    print wrongTestCase
+    print vars
+    print arrays
+
+    mutProb = 0.4
+
+    def testFunc(self, **vars):
+        """
+        Just wanting to model x^2 + y
+        """
+        return vars['c'] ** 2 + vars['b']
+
+    def fitness(self):
+        # choose 1000 random values
+        matches = 0
+        for correct, incorrect in zip(self.testVals, self.wrongTestVals):
+            if self.calc(**correct) == 1 and self.calc(**incorrect) == 0:
+                matches += 2
+            elif self.calc(**correct) == 1:
+                matches += 1
+        return (200 - matches)
+
+    # maximum tree depth when generating randomly
+    initDepth = 5
 
 # now create the population class
 class ProgPop(Population):
-	
-	species = MyProg
-	initPopulation = 1000
-	
-	# cull to this many children after each generation
-	childCull = 2000
 
-	# number of children to create after each generation
-	childCount = 2000
+    species = MyProg
+    initPopulation = 100
 
-	incest = 50
+    # cull to this many children after each generation
+    childCull = 200
 
-	numNewOrganisms = 50
+    # number of children to create after each generation
+    childCount = 200
 
-	mutants = 0.3
+    incest = 20
+
+    numNewOrganisms = 20
+
+    mutants = 0.3
 
 
 pop = ProgPop()
 
 def main(nfittest=10, nkids=100):
-	
-	global pop
 
-	ngens = 0
-	i = 0
-	while True:
-		b = pop.best()
-		b.dump()
-		#for organism in pop.organisms:
-			#organism.dump()
-				
-		print "generation %s: %s best=%s average=%s)" % (
-			i, str(b), b.fitness(), pop.fitness())
-		if b.fitness() <= 0:
-			print "a perfect invariant found"
-			b.dump()
-		if pop.fitness() <= 0:
-			print "the whole population consists of perfect invariants"
-			for organism in pop.organisms:
-				organism.dump()
-			break
-		i += 1
-		ngens += 1
-		
-		#if ngens < 3:
-		pop.gen()
-		#else:
-			#for organism in pop.organisms:
-			#	organism.dump()
-			#break
-			#print "failed after 100 generations, restarting"
-			#pop = ProgPop()
-			#ngens = 0
+    global pop
+
+    ngens = 0
+    i = 0
+    while True:
+        b = pop.best()
+        b.dump()
+        #for organism in pop.organisms:
+            #organism.dump()
+
+        print "generation %s: %s best=%s average=%s)" % (
+            i, str(b), b.fitness(), pop.fitness())
+        #if b.fitness() <= 0:
+            #print "a perfect invariant found"
+            #b.dump()
+        #if pop.fitness() <= 0:
+            #print "the whole population consists of perfect invariants"
+            #for organism in pop.organisms:
+                #organism.dump()
+            #break
+        i += 1
+        ngens += 1
+
+        #if ngens < 15:
+        pop.gen()
+        #else:
+            #for organism in pop.organisms:
+                #organism.dump()
+                #print organism.fitness()
+            #break
+            #print "failed after 100 generations, restarting"
+            #pop = ProgPop()
+            #ngens = 0
 
 if __name__ == '__main__':
-	main()
-	pass
+    main()
+    pass
 

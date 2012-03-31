@@ -540,6 +540,8 @@ class ProgOrganism(BaseOrganism):
                 #return ConstNode(self)
     
         # either root, or not maxed, or 50-50 chance
+        if depth >= self.initDepth - 1 and type == conjunction:
+            return FuncNode(self, depth, choice((1, 2)))
         return FuncNode(self, depth, type)
     
     #@-node:genNode
