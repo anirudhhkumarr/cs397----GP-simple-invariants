@@ -188,12 +188,12 @@ def tan(x):
         #raise
         return x[0]
 
-params = [[1, 3, 2, 4]] #enter the program input parameters as a single list
+params = [1, [1, 3, 2, 4]] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
     try:
-        index = p[0].index(1)
+        index = p[1].index(p[0])
     except ValueError:
         index = -1
     return locals() #return all the local variables in current scope
@@ -307,20 +307,20 @@ class MyProg(ProgOrganism):
         return (200 - matches)
         
     # maximum tree depth when generating randomly
-    initDepth = 4
+    initDepth = 5
 
 # now create the population class
 class ProgPop(Population):
     
     species = MyProg
-    initPopulation = 100
+    initPopulation = 1000
     
     
     # cull to this many children after each generation
-    childCull = 200
+    childCull = 2000
 
     # number of children to create after each generation
-    childCount = 200
+    childCount = 2000
 
     incest = 50
 
@@ -342,14 +342,14 @@ def main(nfittest=10, nkids=100):
                 
         print "generation %s: %s best=%s average=%s)" % (
             i, str(b), b.fitness(), pop.fitness())
-        if b.fitness() <= 0:
-            print "a perfect invariant found"
-            b.dump()
-        if pop.fitness() <= 0:
-            print "the whole population consists of perfect invariants"
-            for organism in pop.organisms:
-                organism.dump()
-            break
+        #if b.fitness() <= 0:
+            #print "a perfect invariant found"
+            #b.dump()
+        #if pop.fitness() <= 0:
+            #print "the whole population consists of perfect invariants"
+            #for organism in pop.organisms:
+                #organism.dump()
+            #break
         i += 1
         ngens += 1
         
@@ -357,7 +357,7 @@ def main(nfittest=10, nkids=100):
         pop.gen()
         #else:
             #for organism in pop.organisms:
-            #   organism.dump()
+               #organism.dump()
             #break
             #print "failed after 100 generations, restarting"
             #pop = ProgPop()
