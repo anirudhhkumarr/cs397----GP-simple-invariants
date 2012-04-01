@@ -1,0 +1,49 @@
+{'p0': [10, -10, -9, 2], 'maximum': 10}
+{'p0': [10, -10, -9, 2], 'maximum': 1}
+['maximum']
+['p0']
+organism:
+  Ei
+    =
+      +
+        {maximum}
+        {p0[i]}
+      +
+        {p0[i]}
+        {p0[i]}
+generation 0: <MyProg:24> best=24 average=175)
+organism:
+  ^
+    Vi
+      <=
+        {p0[i]}
+        {maximum}
+    Ei
+      =
+        {p0[i]}
+        {maximum}
+generation 1: <MyProg:13> best=13 average=87)
+organism:
+  ^
+    Vi
+      <=
+        {p0[i]}
+        {maximum}
+    Ei
+      =
+        {p0[i]}
+        {maximum}
+generation 2: <MyProg:13> best=13 average=70)
+^Corganism:
+  ^
+    Vi
+      <=
+        {p0[i]}
+        {maximum}
+    Ei
+      =
+        {p0[i]}
+        {maximum}
+generation 3: <MyProg:13> best=13 average=81)
+
+

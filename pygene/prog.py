@@ -62,8 +62,6 @@ class BaseNode:
 #@-node:class BaseNode
 #@+node:class FuncNode
 
-class QuantNode(BaseNode):
-	
 
 class FuncNode(BaseNode):
     """

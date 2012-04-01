@@ -96,13 +96,13 @@ def equal(x, y):
 
 def lt(x, y):
     try:
-        return x < y
+        return x <= y
     except:
         raise incompatibleTypes
 
 def gt(x, y):
     try:
-        return x > y
+        return x >= y
     except:
         raise incompatibleTypes
 
@@ -114,6 +114,7 @@ def forall(expr, **vars):
             vars['i'] = i
             i += 1
             return_val = return_val and expr.calc(**vars)
+        return return_val
     except:
         return return_val
 
@@ -125,6 +126,7 @@ def exists(expr, **vars):
             vars['i'] = i
             i += 1
             return_val = return_val or expr.calc(**vars)
+        return return_val
     except:
         return return_val
 
@@ -132,7 +134,7 @@ params = [[1, 2, 3, 4]] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
-    index = p[0].index(max(p[0]))
+    maximum = max(p[0])
     return locals() #return all the local variables in current scope
 
 def getrandom(var):
@@ -154,8 +156,8 @@ class MyProg(ProgOrganism):
         }
     boolfuncs = {
         '=' : equal,
-        '<' : lt,
-        '>' : gt
+        '<=' : lt,
+        '>=' : gt
         }
     conjunctions = {
         '^' : _and,
@@ -234,11 +236,11 @@ class MyProg(ProgOrganism):
 				elif self.calc(**correct) == 1:
 					matches += 1
 			except:
-				return 200			
+				return 200
         return (200 - matches)
 
     # maximum tree depth when generating randomly
-    initDepth = 5
+    initDepth = 4
 
 # now create the population class
 class ProgPop(Population):
@@ -252,9 +254,9 @@ class ProgPop(Population):
     # number of children to create after each generation
     childCount = 200
 
-    incest = 25
+    incest = 50
 
-    numNewOrganisms = 25
+    numNewOrganisms = 50
 
     mutants = 0.3
 
