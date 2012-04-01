@@ -13,6 +13,7 @@ from organism import BaseOrganism
 
 from xmlio import PGXmlMixin
 
+quantifiers = -1
 conjunction = 0
 boolean = 1
 arithmetic = 2
@@ -60,6 +61,7 @@ class BaseNode:
 
 #@-node:class BaseNode
 #@+node:class FuncNode
+
 class FuncNode(BaseNode):
     """
     node which holds a function and its argument nodes
@@ -354,6 +356,57 @@ class VarNode(TerminalNode):
     
     #@-node:copy
     #@-others
+    
+class ArrayNode(TerminalNode):
+    """
+    Holds a Array derefrence
+    """
+    #@    @+others
+    #@+node:__init__
+    def __init__(self, org, name=None):
+        """
+        Inits this node as a array placeholder
+        """
+        self.org = org
+    
+        if name == None:
+            name = choice(org.arrays)
+        
+        self.name = name
+        self.type = terminal
+        
+    #@-node:__init__
+    #@+node:calc
+    def calc(self, **vars):
+        """
+        Calculates val of this node
+        """
+        val = arrays.get(self.name, 0.0)[vars.get('i', 0.0)]
+        #print "VarNode.calc: name=%s val=%s vars=%s" % (
+        #    self.name,
+        #    val,
+        #    vars,
+        #    )
+        return val
+    #@-node:calc
+    #@+node:dump
+    def dump(self, level=0):
+        
+        indents = "  " * level
+        #print indents + "var {" + self.name + "}"
+        print "%s{%s[i]}" % (indents, self.name)
+    
+    #@-node:dump
+    #@+node:copy
+    def copy(self):
+        """
+        clone this node
+        """
+        return ArrayNode(self.org, self.name)
+    
+    #@-node:copy
+    #@-others
+
 
 #@-node:class VarNode
 #@+node:class ProgOrganismMetaclass
@@ -378,6 +431,7 @@ class ProgOrganismMetaclass(type):
         conjunctions = dict['conjunctions']
         consts = dict['consts']
         vars = dict['vars']
+        arrays = dict['arrays']
         
         # process the funcs
         arithfuncsList = []
@@ -539,11 +593,11 @@ class ProgOrganism(BaseOrganism):
     
         if depth > 1 and (depth >= self.initDepth or (type == arithmetic and flipCoin()) or type > arithmetic):
             # not root, and either maxed depth, or 50-50 chance, or terminal node
-            #if flipCoin():
+            if flipCoin():
                 # choose a var
-            return VarNode(self)
-            #else:
-                #return ConstNode(self)
+				return VarNode(self)
+            else:
+                return ArrayNode(self)
     
         # either root, or not maxed, or 50-50 chance
         if depth >= self.initDepth - 1 and type == conjunction:

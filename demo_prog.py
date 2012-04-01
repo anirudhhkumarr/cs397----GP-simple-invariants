@@ -128,14 +128,14 @@ def exists(expr, **vars):
     except:
         return return_val
 
-params = [1, 2, 3] #enter the program input parameters as a single list
+params = [[1, 2, 3, 4]] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
-    if p[0] < p[1]:
-        a = p[2]
-    else:
-        a = p[1]
+    max = p[0][0]
+    for i in p[0]:
+		if i > max:
+			max = i
     return locals() #return all the local variables in current scope
 
 def getrandom(var):
@@ -162,12 +162,12 @@ class MyProg(ProgOrganism):
         }
     conjunctions = {
         '^' : _and,
-        '!' : _not
-        #'v' : _or
-        }
-    quantifiers = {
+        '!' : _not,
+        #'v' : _or,
         'Ei' : exists,
         'Vi' : forall
+        }
+    quantifiers = {
     }
 
     vars = []
