@@ -36,6 +36,10 @@ def flipType(type):
     else:
         return 2
 
+def shouldISplit(typeToSplit, selfType, childType):
+    return ((typeToSplit == 0 and selfType == 0) \
+            or typeToSplit == 1) and childType == 1
+    
 #@-node:imports
 #@+node:class BaseNode
 class BaseNode:
@@ -134,7 +138,7 @@ class FuncNode(BaseNode):
     
     #@-node:dump
     #@+node:copy
-    def copy(self, doSplit=False):
+    def copy(self, doSplit=False, typeToSplit = None):
         """
         Copies this node and recursively its children, returning
         the copy
@@ -175,7 +179,8 @@ class FuncNode(BaseNode):
         # if child is not terminal, randomly choose whether
         # to split here
         if random() < 0.33 \
-                or isinstance(childToSplit, TerminalNode):
+                or isinstance(childToSplit, TerminalNode) \
+                or shouldISplit(self.type, childToSplit.type, typeToSplit):
     
             # split at this node, and just copy the kids
             clonedChildren = \
@@ -424,6 +429,7 @@ class ProgOrganism(BaseOrganism):
     boolfuncs = {}
     conjunctions = {}
     vars = []
+    arrays = []
     consts = []
     
     # maximum tree depth when generating randomly
@@ -457,7 +463,7 @@ class ProgOrganism(BaseOrganism):
         ourRootCopy, ourFrag, ourList, ourIdx = self.split()
     
         # ditto for mate
-        mateRootCopy, mateFrag, mateList, mateIdx = mate.split()
+        mateRootCopy, mateFrag, mateList, mateIdx = mate.split(ourFrag.type)
     
         # swap the fragments
         ourList[ourIdx] = mateFrag
@@ -482,7 +488,7 @@ class ProgOrganism(BaseOrganism):
     
     #@-node:mutate
     #@+node:split
-    def split(self):
+    def split(self, typeToSplit=None):
         """
         support for recombination, returns a tuple
         with four values:
@@ -495,7 +501,7 @@ class ProgOrganism(BaseOrganism):
               should be written
         """
         # otherwise, delegate the split down the tree
-        copy, subtree, lst, idx = self.tree.copy(True)
+        copy, subtree, lst, idx = self.tree.copy(True, typeToSplit)
         return (copy, subtree, lst, idx)
     
     #@-node:split
