@@ -132,10 +132,7 @@ params = [[1, 2, 3, 4]] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
-    max = p[0][0]
-    for i in p[0]:
-		if i > max:
-			max = i
+    index = p[0].index(max(p[0]))
     return locals() #return all the local variables in current scope
 
 def getrandom(var):
@@ -231,10 +228,13 @@ class MyProg(ProgOrganism):
         # choose 1000 random values
         matches = 0
         for correct, incorrect in zip(self.testVals, self.wrongTestVals):
-            if self.calc(**correct) == 1 and self.calc(**incorrect) == 0:
-                matches += 2
-            elif self.calc(**correct) == 1:
-                matches += 1
+			try:
+				if self.calc(**correct) == 1 and self.calc(**incorrect) == 0:
+					matches += 2
+				elif self.calc(**correct) == 1:
+					matches += 1
+			except:
+				return 200			
         return (200 - matches)
 
     # maximum tree depth when generating randomly
@@ -252,9 +252,9 @@ class ProgPop(Population):
     # number of children to create after each generation
     childCount = 200
 
-    incest = 20
+    incest = 25
 
-    numNewOrganisms = 20
+    numNewOrganisms = 25
 
     mutants = 0.3
 

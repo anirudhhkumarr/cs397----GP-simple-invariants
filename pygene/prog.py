@@ -62,6 +62,9 @@ class BaseNode:
 #@-node:class BaseNode
 #@+node:class FuncNode
 
+class QuantNode(BaseNode):
+	
+
 class FuncNode(BaseNode):
     """
     node which holds a function and its argument nodes
@@ -388,7 +391,7 @@ class ArrayNode(TerminalNode):
         """
         Calculates val of this node
         """
-        val = arrays.get(self.name, 0.0)[vars.get('i', 0.0)]
+        val = vars.get(self.name, 0.0)[vars.get('i', 0.0)]
         #print "VarNode.calc: name=%s val=%s vars=%s" % (
         #    self.name,
         #    val,
@@ -438,6 +441,7 @@ class ProgOrganismMetaclass(type):
         conjunctions = dict['conjunctions']
         consts = dict['consts']
         vars = dict['vars']
+        arrays = dict['arrays']
         
         # process the funcs
         arithfuncsList = []
@@ -509,7 +513,7 @@ class ProgOrganism(BaseOrganism):
         self.fitness_cache = None
 
         if root == None:
-            root = self.genNode(flipType(0))
+            root = self.genNode(flipType(conjunction))
     
         self.tree = root
     
