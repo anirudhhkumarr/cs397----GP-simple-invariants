@@ -93,6 +93,8 @@ class FuncNode(BaseNode):
                 func, nargs = org.conjunctionsDict[name]
         
         # and fill in the args, from given, or randomly
+        if not children and name in ('Ei','Vi','exists','forall'):
+            children = children = [org.genNode(flipType(conjunction), depth+1)]
         if not children:
             children = [org.genNode(flipType(type), depth+1) for i in xrange(nargs)]
     
@@ -115,9 +117,12 @@ class FuncNode(BaseNode):
             #    child.__class__,
             #    )
             #child.dump()
-            arg = child.calc(**vars)
-            #print "child returned %s" % repr(arg)
-            args.append(arg)
+            if self.name in ('Ei','Vi','exists','forall'):
+                args.append(child)
+            else:
+                arg = child.calc(**vars)
+                #print "child returned %s" % repr(arg)
+                args.append(arg)
         
         #print "FuncNode.calc: name=%s func=%s vars=%s args=%s" % (
         #    self.name,
@@ -125,8 +130,10 @@ class FuncNode(BaseNode):
         #    vars,
         #    args
         #    )
-    
-        return self.func(*args)
+        if self.name in ('Ei','Vi','exists','forall'):
+            return self.func(*args, **vars)
+        else:
+            return self.func(*args)
     
     #@-node:calc
     #@+node:dump
@@ -431,7 +438,6 @@ class ProgOrganismMetaclass(type):
         conjunctions = dict['conjunctions']
         consts = dict['consts']
         vars = dict['vars']
-        arrays = dict['arrays']
         
         # process the funcs
         arithfuncsList = []
@@ -595,7 +601,7 @@ class ProgOrganism(BaseOrganism):
             # not root, and either maxed depth, or 50-50 chance, or terminal node
             if flipCoin():
                 # choose a var
-				return VarNode(self)
+                return VarNode(self)
             else:
                 return ArrayNode(self)
     
