@@ -69,6 +69,12 @@ def div(x,y):
     except:
         #raise
         return x
+        
+def implies(x, y):
+	try:
+		return (x and y) or (not x and not y)
+	except:
+		raise incompatibleTypes
 
 def _and(x,y):
     try:
@@ -130,11 +136,14 @@ def exists(expr, **vars):
     except:
         return return_val
 
-params = [[1, 2, 3, 4]] #enter the program input parameters as a single list
+params = [1, [1, 2, 3, 4]] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
-    maximum = max(p[0])
+    if p[0] in p[1]:
+        exists = 1
+    else:
+        exists = -1
     return locals() #return all the local variables in current scope
 
 def getrandom(var):
@@ -156,12 +165,13 @@ class MyProg(ProgOrganism):
         }
     boolfuncs = {
         '=' : equal,
-        '<=' : lt,
-        '>=' : gt
+#        '<=' : lt,
+#        '>=' : gt
         }
     conjunctions = {
         '^' : _and,
-        '!' : _not,
+#        '<->': implies,
+#        '!' : _not,
         #'v' : _or,
         'Ei' : exists,
         'Vi' : forall
@@ -173,7 +183,7 @@ class MyProg(ProgOrganism):
     arrays = []
     testVals = []
     wrongTestVals = []
-    consts = [1.0, 2.0, 10.0]
+    consts = [1]
     numCases = 100
 
     for j in range(1,numCases):
@@ -230,13 +240,13 @@ class MyProg(ProgOrganism):
         # choose 1000 random values
         matches = 0
         for correct, incorrect in zip(self.testVals, self.wrongTestVals):
-			try:
-				if self.calc(**correct) == 1 and self.calc(**incorrect) == 0:
-					matches += 2
-				elif self.calc(**correct) == 1:
-					matches += 1
-			except:
-				return 200
+            try:
+                if self.calc(**correct) == 1 and self.calc(**incorrect) == 0:
+                    matches += 2
+                elif self.calc(**correct) == 1:
+                    matches += 1
+            except:
+                return 200
         return (200 - matches)
 
     # maximum tree depth when generating randomly

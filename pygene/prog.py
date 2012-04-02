@@ -371,7 +371,7 @@ class ArrayNode(TerminalNode):
     """
     #@    @+others
     #@+node:__init__
-    def __init__(self, org, name=None):
+    def __init__(self, org, name=None, index=None):
         """
         Inits this node as a array placeholder
         """
@@ -379,7 +379,14 @@ class ArrayNode(TerminalNode):
     
         if name == None:
             name = choice(org.arrays)
-        
+            
+        if index == None:
+            if flipCoin():
+                index = choice(org.vars)
+            else:
+                index = 'i'
+                
+        self.index = index
         self.name = name
         self.type = terminal
         
@@ -389,7 +396,7 @@ class ArrayNode(TerminalNode):
         """
         Calculates val of this node
         """
-        val = vars.get(self.name, 0.0)[vars.get('i', 0.0)]
+        val = vars.get(self.name, 0.0)[vars.get(self.index, 0.0)]
         #print "VarNode.calc: name=%s val=%s vars=%s" % (
         #    self.name,
         #    val,
@@ -402,7 +409,7 @@ class ArrayNode(TerminalNode):
         
         indents = "  " * level
         #print indents + "var {" + self.name + "}"
-        print "%s{%s[i]}" % (indents, self.name)
+        print "%s{%s[%s]}" % (indents, self.name, self.index)
     
     #@-node:dump
     #@+node:copy
@@ -410,7 +417,7 @@ class ArrayNode(TerminalNode):
         """
         clone this node
         """
-        return ArrayNode(self.org, self.name)
+        return ArrayNode(self.org, self.name, self.index)
     
     #@-node:copy
     #@-others
@@ -605,7 +612,10 @@ class ProgOrganism(BaseOrganism):
                 # choose a var
                 return VarNode(self)
             else:
-                return ArrayNode(self)
+                if flipCoin():
+                    return ArrayNode(self)
+                else:
+                    return ConstNode(self)
     
         # either root, or not maxed, or 50-50 chance
         if depth >= self.initDepth - 1 and type == conjunction:
