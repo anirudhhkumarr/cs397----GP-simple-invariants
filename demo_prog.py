@@ -71,10 +71,10 @@ def div(x,y):
         return x
         
 def implies(x, y):
-	try:
-		return (x and y) or (not x and not y)
-	except:
-		raise incompatibleTypes
+    try:
+        return (x and y) or (not x and not y)
+    except:
+        raise incompatibleTypes
 
 def _and(x,y):
     try:
@@ -136,14 +136,14 @@ def exists(expr, **vars):
     except:
         return return_val
 
-params = [1, [1, 2, 3, 4]] #enter the program input parameters as a single list
+params = [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
-    if p[0] in p[1]:
-        exists = 1
-    else:
-        exists = -1
+    try:
+        searchindex = p[1].index(p[0])
+    except ValueError:
+        searchindex = -1
     return locals() #return all the local variables in current scope
 
 def getrandom(var):
@@ -228,7 +228,7 @@ class MyProg(ProgOrganism):
     print vars
     print arrays
 
-    mutProb = 0.4
+    mutProb = 0.2
 
     def testFunc(self, **vars):
         """
@@ -264,9 +264,9 @@ class ProgPop(Population):
     # number of children to create after each generation
     childCount = 200
 
-    incest = 50
+    incest = 20
 
-    numNewOrganisms = 50
+    numNewOrganisms = 20
 
     mutants = 0.3
 
@@ -295,6 +295,8 @@ def main(nfittest=10, nkids=100):
             #for organism in pop.organisms:
                 #organism.dump()
             #break
+        for organism in pop.organisms:
+            organism.dump()
         i += 1
         ngens += 1
 

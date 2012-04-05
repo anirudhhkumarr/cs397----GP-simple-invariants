@@ -30,12 +30,9 @@ def flipCoin():
     
 def flipType(type):
     if type == 0:
-        if flipCoin():
-            return 1
-        else:
-            return 0
+        return choice((0, 1))
     else:
-        return 2
+        return 3
 
 def shouldISplit(typeToSplit, selfType, childType):
     return ((typeToSplit == 0 and selfType == 0) \
@@ -95,9 +92,11 @@ class FuncNode(BaseNode):
         
         # and fill in the args, from given, or randomly
         if not children and name in ('Ei','Vi','exists','forall'):
-            children = children = [org.genNode(flipType(conjunction), depth+1)]
+            children = [org.genNode(flipType(conjunction), depth+1)]
         if not children:
-            children = [org.genNode(flipType(type), depth+1) for i in xrange(nargs)]
+            children = []
+            for i in xrange(nargs):
+                children.append(org.genNode(flipType(type), depth+1))
     
         self.name = name
         self.func = func
@@ -234,7 +233,7 @@ class FuncNode(BaseNode):
                 return
     
         # mutate this node - with a chance of less than 1 in 3 mutate the function of this node or replace one of its children
-        if random() < 0.33:
+        if flipCoin():
             if self.type == arithmetic:
                 funcList = self.org.arithfuncsList
             elif self.type == boolean:
@@ -526,7 +525,7 @@ class ProgOrganism(BaseOrganism):
     #@+node:mate
     def mate(self, mate):
         """
-        Perform recombination of subtree elements
+        with a probabilty of .7 Perform recombination of subtree elements and with .3 return the and of the two trees
         """
         # get copy of self, plus fragment and location details
         ourRootCopy, ourFrag, ourList, ourIdx = self.split()
@@ -606,20 +605,20 @@ class ProgOrganism(BaseOrganism):
         to this organism
         """
     
-        if depth > 1 and (depth >= self.initDepth or (type == arithmetic and flipCoin()) or type > arithmetic):
-            # not root, and either maxed depth, or 50-50 chance, or terminal node
+        if depth > 1 and (depth >= self.initDepth or type > arithmetic):
+            # not root, and either maxed depth or terminal node
             if flipCoin():
                 # choose a var
                 return VarNode(self)
             else:
-                if flipCoin():
-                    return ArrayNode(self)
-                else:
-                    return ConstNode(self)
+                #if flipCoin():
+                return ArrayNode(self)
+                #else:
+                    #return ConstNode(self)
     
         # either root, or not maxed, or 50-50 chance
         if depth >= self.initDepth - 1 and type == conjunction:
-            return FuncNode(self, depth, choice((1, 2)))
+            return FuncNode(self, depth, boolean)
         return FuncNode(self, depth, type)
     
     #@-node:genNode
