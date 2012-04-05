@@ -71,10 +71,10 @@ def div(x,y):
         return x
         
 def implies(x, y):
-	try:
-		return (x and y) or (not x and not y)
-	except:
-		raise incompatibleTypes
+    try:
+        return (not x or y) and (not y or x)
+    except:
+        raise incompatibleTypes
 
 def _and(x,y):
     try:
@@ -116,7 +116,7 @@ def forall(expr, **vars):
     try:
         return_val = True
         i = 0
-        while i < 4:
+        while i < 10:
             vars['i'] = i
             i += 1
             return_val = return_val and expr.calc(**vars)
@@ -128,7 +128,7 @@ def exists(expr, **vars):
     try:
         return_val = False
         i = 0
-        while i < 4:
+        while i < 10:
             vars['i'] = i
             i += 1
             return_val = return_val or expr.calc(**vars)
@@ -136,14 +136,11 @@ def exists(expr, **vars):
     except:
         return return_val
 
-params = [1, [1, 2, 3, 4]] #enter the program input parameters as a single list
+params = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 0]] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
-    if p[0] in p[1]:
-        exists = 1
-    else:
-        exists = -1
+    indexofmin = p[0].index(min(p[0]))
     return locals() #return all the local variables in current scope
 
 def getrandom(var):
@@ -165,12 +162,12 @@ class MyProg(ProgOrganism):
         }
     boolfuncs = {
         '=' : equal,
-#        '<=' : lt,
+        '<=' : lt,
 #        '>=' : gt
         }
     conjunctions = {
         '^' : _and,
-#        '<->': implies,
+        #'<->': implies,
 #        '!' : _not,
         #'v' : _or,
         'Ei' : exists,
@@ -264,9 +261,9 @@ class ProgPop(Population):
     # number of children to create after each generation
     childCount = 200
 
-    incest = 50
+    incest = 20
 
-    numNewOrganisms = 50
+    numNewOrganisms = 20
 
     mutants = 0.3
 
@@ -277,7 +274,6 @@ def main(nfittest=10, nkids=100):
 
     global pop
 
-    ngens = 0
     i = 0
     while True:
         b = pop.best()
@@ -296,18 +292,14 @@ def main(nfittest=10, nkids=100):
                 #organism.dump()
             #break
         i += 1
-        ngens += 1
 
-        #if ngens < 15:
+        #try:
         pop.gen()
-        #else:
+        #except EOFError:
             #for organism in pop.organisms:
                 #organism.dump()
                 #print organism.fitness()
             #break
-            #print "failed after 100 generations, restarting"
-            #pop = ProgPop()
-            #ngens = 0
 
 if __name__ == '__main__':
     main()

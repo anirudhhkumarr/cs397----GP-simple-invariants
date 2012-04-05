@@ -95,7 +95,7 @@ class FuncNode(BaseNode):
         
         # and fill in the args, from given, or randomly
         if not children and name in ('Ei','Vi','exists','forall'):
-            children = children = [org.genNode(flipType(conjunction), depth+1)]
+            children = [org.genNode(boolean, depth+1)]
         if not children:
             children = [org.genNode(flipType(type), depth+1) for i in xrange(nargs)]
     
@@ -606,16 +606,16 @@ class ProgOrganism(BaseOrganism):
         to this organism
         """
     
-        if depth > 1 and (depth >= self.initDepth or (type == arithmetic and flipCoin()) or type > arithmetic):
+        if depth > 1 and (depth >= self.initDepth or (type == arithmetic and flipCoin()) or type > boolean):
             # not root, and either maxed depth, or 50-50 chance, or terminal node
             if flipCoin():
                 # choose a var
                 return VarNode(self)
             else:
-                if flipCoin():
-                    return ArrayNode(self)
-                else:
-                    return ConstNode(self)
+                #if flipCoin():
+                return ArrayNode(self)
+                #else:
+                    #return ConstNode(self)
     
         # either root, or not maxed, or 50-50 chance
         if depth >= self.initDepth - 1 and type == conjunction:
