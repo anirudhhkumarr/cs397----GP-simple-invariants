@@ -136,22 +136,32 @@ def exists(expr, **vars):
     except:
         return return_val
 
-params = [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]] #enter the program input parameters as a single list
+params = [6, [1, 2, 3, 4, 5, 6, 7, 8]] #enter the program input parameters as a single list
 
+def bSearch(key, p, low, high):
+	if low > high:
+		return low
+	mid = (low+high)/2
+	if key == p[mid]:
+		return key
+	if key < p[mid]:
+		return bSearch(key, p, low, mid-1)
+	else:
+		return bSearch(key, p, mid+1, high)
+	
 def inputProgram(p = params):
     #enter the program or function here
-    try:
-        searchindex = p[1].index(p[0])
-    except ValueError:
-        searchindex = -1
+    index = bSearch(p[0],p[1],0,len(p[1])-1)
     return locals() #return all the local variables in current scope
 
 def getrandom(var):
     if type(var) is int or type(var) is long or type(var) is float:
         return randint(-10, 10)
     elif type(var) is list:
-        return [randint(-10, 10)\
+        list1 = [randint(-10, 10)\
                 for i in xrange(len(var))]
+        list1.sort()
+        return list1
 
 # define the class comprising the program organism
 class MyProg(ProgOrganism):
@@ -165,16 +175,16 @@ class MyProg(ProgOrganism):
         }
     boolfuncs = {
         '=' : equal,
-#        '<=' : lt,
-#        '>=' : gt
+        '<=' : lt,
+        '>=' : gt
         }
     conjunctions = {
         '^' : _and,
 #        '<->': implies,
 #        '!' : _not,
         #'v' : _or,
-        'Ei' : exists,
-        'Vi' : forall
+#        'Ei' : exists,
+#        'Vi' : forall
         }
     quantifiers = {
     }
@@ -295,8 +305,6 @@ def main(nfittest=10, nkids=100):
             #for organism in pop.organisms:
                 #organism.dump()
             #break
-        for organism in pop.organisms:
-            organism.dump()
         i += 1
         ngens += 1
 

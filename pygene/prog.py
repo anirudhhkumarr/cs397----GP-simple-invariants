@@ -612,6 +612,7 @@ class ProgOrganism(BaseOrganism):
                 return VarNode(self)
             else:
                 #if flipCoin():
+                #print 'create Array'
                 return ArrayNode(self)
                 #else:
                     #return ConstNode(self)
