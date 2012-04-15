@@ -70,9 +70,9 @@ def div(x,y):
         #raise
         return x
         
-def implies(x, y):
+def implies(x, y, **vars):
     try:
-        return (x and y) or (not x and not y)
+        return (x and y and vars.get('returnvalue',0.0) != -1) or (x and (not y) and vars.get('returnvalue',0.0) == -1)
     except:
         raise incompatibleTypes
 
@@ -116,7 +116,7 @@ def forall(expr, **vars):
     try:
         return_val = True
         i = 0
-        while i < 4:
+        while i < 10:
             vars['i'] = i
             i += 1
             return_val = return_val and expr.calc(**vars)
@@ -128,7 +128,7 @@ def exists(expr, **vars):
     try:
         return_val = False
         i = 0
-        while i < 4:
+        while i < 10:
             vars['i'] = i
             i += 1
             return_val = return_val or expr.calc(**vars)
@@ -136,14 +136,12 @@ def exists(expr, **vars):
     except:
         return return_val
 
-params = [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]] #enter the program input parameters as a single list
+params = [[1, 2, 5, 4, 5, 6, 7, 8, 9, 0]] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
-    try:
-        searchindex = p[1].index(p[0])
-    except ValueError:
-        searchindex = -1
+    p[0].sort()
+    p[0].reverse()
     return locals() #return all the local variables in current scope
 
 def getrandom(var):
@@ -165,12 +163,12 @@ class MyProg(ProgOrganism):
         }
     boolfuncs = {
         '=' : equal,
-#        '<=' : lt,
-#        '>=' : gt
+        '<=' : lt,
+        '>=' : gt
         }
     conjunctions = {
-        '^' : _and,
-#        '<->': implies,
+#        '^' : _and,
+#        '->': implies,
 #        '!' : _not,
         #'v' : _or,
         'Ei' : exists,
@@ -194,16 +192,16 @@ class MyProg(ProgOrganism):
         for i in params:
             testParams.append(getrandom(i))
         origParams = testParams[:]
-
         # insert all the local variables encountered while running the program in testCase
+        print origParams
         testCase = inputProgram(testParams)
+        print origParams
         del testCase['p']
-        key = choice(testCase.keys())
         #now check which input parameters have changed as a result running the program
         count = 0
         for i in testParams:
             if origParams[count] != i:
-                #print 'parameter changed'
+                print 'parameter changed'
                 testCase['p' + str(count) + '.orig'] = origParams[count]
                 testCase['p' + str(count) + '.new'] = i
             else:
@@ -213,8 +211,12 @@ class MyProg(ProgOrganism):
         testVals.append(testCase)
 
         #create a wrong testcase by mutating the original testcase
+        key = 'p0'
         wrongTestCase = testCase.copy()
-        wrongTestCase[key] = getrandom(wrongTestCase[key])
+        wrongKey = getrandom(wrongTestCase[key])
+        while wrongKey == wrongTestCase[key]:
+             wrongKey = getrandom(wrongTestCase[key])
+        wrongTestCase[key] = wrongKey
         wrongTestVals.append(wrongTestCase)
 
     #now take a testcase and insert the values in vars and arrays
@@ -295,8 +297,6 @@ def main(nfittest=10, nkids=100):
             #for organism in pop.organisms:
                 #organism.dump()
             #break
-        for organism in pop.organisms:
-            organism.dump()
         i += 1
         ngens += 1
 

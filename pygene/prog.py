@@ -130,7 +130,7 @@ class FuncNode(BaseNode):
         #    vars,
         #    args
         #    )
-        if self.name in ('Ei','Vi','exists','forall'):
+        if self.name in ('Ei','Vi','->','exists','forall','implies'):
             return self.func(*args, **vars)
         else:
             return self.func(*args)
@@ -375,18 +375,27 @@ class ArrayNode(TerminalNode):
         Inits this node as a array placeholder
         """
         self.org = org
-    
         if name == None:
             name = choice(org.arrays)
-            
+        self.name = name
         if index == None:
             if flipCoin():
-                index = choice(org.vars)
+                funcList = org.arithfuncsList
+                name, func, nargs = choice(funcList)
+                type = arithmetic
+                depth = 1
+                children = []
+                for i in xrange(nargs):
+                    if flipCoin():
+                        children.append(VarNode(org, 'i'))
+                    else:
+                        children.append(ConstNode(org))
+                index = FuncNode(org, depth, type, name, children)
             else:
-                index = 'i'
+                index = VarNode(org, 'i')
                 
         self.index = index
-        self.name = name
+        
         self.type = terminal
         
     #@-node:__init__
@@ -395,7 +404,7 @@ class ArrayNode(TerminalNode):
         """
         Calculates val of this node
         """
-        val = vars.get(self.name, 0.0)[vars.get(self.index, 0.0)]
+        val = vars.get(self.name, 0.0)[self.index.calc(**vars)]
         #print "VarNode.calc: name=%s val=%s vars=%s" % (
         #    self.name,
         #    val,
@@ -408,7 +417,9 @@ class ArrayNode(TerminalNode):
         
         indents = "  " * level
         #print indents + "var {" + self.name + "}"
-        print "%s{%s[%s]}" % (indents, self.name, self.index)
+        print "%s{%s[" % (indents, self.name)
+        self.index.dump(level+1)
+        print "%s]}" % (indents)
     
     #@-node:dump
     #@+node:copy
@@ -607,14 +618,7 @@ class ProgOrganism(BaseOrganism):
     
         if depth > 1 and (depth >= self.initDepth or type > arithmetic):
             # not root, and either maxed depth or terminal node
-            if flipCoin():
-                # choose a var
-                return VarNode(self)
-            else:
-                #if flipCoin():
-                return ArrayNode(self)
-                #else:
-                    #return ConstNode(self)
+            return ArrayNode(self)
     
         # either root, or not maxed, or 50-50 chance
         if depth >= self.initDepth - 1 and type == conjunction:

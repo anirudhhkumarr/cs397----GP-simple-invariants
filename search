@@ -1,0 +1,56 @@
+{'p0': 10, 'p1': [6, -9, -1, 1, -5, 9, 2, 8, -3, -9], 'returnvalue': -1}
+{'p0': 10, 'p1': [6, -9, -1, 1, -5, 9, 2, 8, -3, -9], 'returnvalue': -7}
+['p0', 'returnvalue']
+['p1']
+organism:
+  Vi
+    ->
+      =
+        {p0}
+        {p0}
+      =
+        {p0}
+        {p1[p0]}
+generation 0: <MyProg:71> best=71 average=178)
+organism:
+  Ei
+    ->
+      =
+        {p0}
+        {p0}
+      =
+        {p1[returnvalue]}
+        {p0}
+generation 1: <MyProg:3> best=3 average=129)
+organism:
+  Ei
+    ->
+      =
+        {p1[returnvalue]}
+        {p1[i]}
+      =
+        {p1[i]}
+        {p0}
+generation 2: <MyProg:3> best=3 average=117)
+organism:
+  Ei
+    ->
+      =
+        {p1[i]}
+        {p1[returnvalue]}
+      =
+        {p0}
+        {p1[i]}
+generation 3: <MyProg:3> best=3 average=104)
+organism:
+  Ei
+    ->
+      =
+        {p1[i]}
+        {p1[returnvalue]}
+      =
+        {p0}
+        {p1[i]}
+generation 4: <MyProg:3> best=3 average=112)
+
+
