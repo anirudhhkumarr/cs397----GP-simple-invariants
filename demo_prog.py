@@ -157,19 +157,19 @@ class MyProg(ProgOrganism):
     """
     arithfuncs = {
         '+' : add,
-#       '-' : sub,
-#       '*' : mul
+       '-' : sub,
+       '*' : mul
 #       '/' :div
         }
     boolfuncs = {
         '=' : equal,
         '<=' : lt,
-        '>=' : gt
+#        '>=' : gt
         }
     conjunctions = {
-#        '^' : _and,
+        '^' : _and,
 #        '->': implies,
-#        '!' : _not,
+        '!' : _not,
         #'v' : _or,
         'Ei' : exists,
         'Vi' : forall
@@ -193,9 +193,7 @@ class MyProg(ProgOrganism):
             testParams.append(getrandom(i))
         origParams = testParams[:]
         # insert all the local variables encountered while running the program in testCase
-        print origParams
         testCase = inputProgram(testParams)
-        print origParams
         del testCase['p']
         #now check which input parameters have changed as a result running the program
         count = 0
@@ -252,7 +250,7 @@ class MyProg(ProgOrganism):
         return (200 - matches)
 
     # maximum tree depth when generating randomly
-    initDepth = 4
+    initDepth = 3
 
 # now create the population class
 class ProgPop(Population):
@@ -266,9 +264,9 @@ class ProgPop(Population):
     # number of children to create after each generation
     childCount = 200
 
-    incest = 20
+    incest = 50
 
-    numNewOrganisms = 20
+    numNewOrganisms = 50
 
     mutants = 0.3
 
