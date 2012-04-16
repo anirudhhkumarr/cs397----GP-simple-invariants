@@ -110,7 +110,7 @@ def forall(expr, **vars):
     try:
         return_val = True
         i = 0
-        while i < 4:
+        while i < 8:
             vars['i'] = i
             i += 1
             return_val = return_val and expr.calc(**vars)
@@ -122,7 +122,7 @@ def exists(expr, **vars):
     try:
         return_val = False
         i = 0
-        while i < 4:
+        while i < 8:
             vars['i'] = i
             i += 1
             return_val = return_val or expr.calc(**vars)
@@ -130,7 +130,7 @@ def exists(expr, **vars):
     except:
         return return_val
 
-params = [[1, 2, 3, 4]] #enter the program input parameters as a single list
+params = [[1, 2, 3, 4, 5, 6, 7, 8]] #enter the program input parameters as a single list
 
 def inputProgram(p = params):
     #enter the program or function here
@@ -157,7 +157,7 @@ class MyProg(ProgOrganism):
     boolfuncs = {
         '=' : equal,
         '<=' : lt,
-        '>=' : gt
+#        '>=' : gt
         }
     conjunctions = {
         '^' : _and,
@@ -258,7 +258,7 @@ class ProgPop(Population):
 
     numNewOrganisms = 50
 
-    mutants = 0.3
+    mutants = 0.6
 
 
 pop = ProgPop()
