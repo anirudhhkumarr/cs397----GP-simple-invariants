@@ -1,0 +1,84 @@
+{'p0': [-8, 2, 4, -5, 8, 2, 9, -9, -3, -7], 'indexofmin': 7}
+{'p0': [-8, 2, 4, -5, 8, 2, 9, -9, -3, -7], 'indexofmin': 5}
+['indexofmin']
+['p0']
+organism:
+  Ei
+    <=
+      {p0[indexofmin]}
+      {indexofmin}
+generation 0: <MyProg:59> best=59 average=170)
+organism:
+  Vi
+    <=
+      {p0[indexofmin]}
+      {p0[i]}
+generation 1: <MyProg:21> best=21 average=90)
+organism:
+  ^
+    Vi
+      <=
+        {p0[indexofmin]}
+        {p0[i]}
+    Ei
+      <=
+        {p0[indexofmin]}
+        {indexofmin}
+generation 2: <MyProg:14> best=14 average=88)
+organism:
+  ^
+    Vi
+      <=
+        {p0[indexofmin]}
+        {p0[i]}
+    Ei
+      <=
+        {p0[indexofmin]}
+        {indexofmin}
+generation 3: <MyProg:14> best=14 average=86)
+organism:
+  ^
+    Vi
+      <=
+        {p0[indexofmin]}
+        {p0[i]}
+    Ei
+      <=
+        {p0[indexofmin]}
+        {indexofmin}
+generation 4: <MyProg:14> best=14 average=87)
+organism:
+  ^
+    Vi
+      <=
+        {p0[indexofmin]}
+        {p0[i]}
+    Ei
+      <=
+        {p0[indexofmin]}
+        {indexofmin}
+generation 5: <MyProg:14> best=14 average=87)
+organism:
+  ^
+    Vi
+      <=
+        {p0[indexofmin]}
+        {p0[i]}
+    Ei
+      <=
+        {p0[indexofmin]}
+        {indexofmin}
+generation 6: <MyProg:14> best=14 average=85)
+organism:
+  ^
+    Vi
+      <=
+        {p0[indexofmin]}
+        {p0[i]}
+    Ei
+      <=
+        {p0[indexofmin]}
+        {indexofmin}
+generation 7: <MyProg:14> best=14 average=86)
+organism:
+

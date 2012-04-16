@@ -261,9 +261,9 @@ class ProgPop(Population):
     # number of children to create after each generation
     childCount = 200
 
-    incest = 20
+    incest = 50
 
-    numNewOrganisms = 20
+    numNewOrganisms = 50
 
     mutants = 0.3
 

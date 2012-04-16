@@ -1,0 +1,34 @@
+{'p0': [7, -4, 1, 9, -6, -3, -9, -10, -9, 2], 'indexofmin': 7}
+{'p0': [7, -4, 1, 9, -6, -3, -9, -10, -9, 2], 'indexofmin': 8}
+['indexofmin']
+['p0']
+organism:
+  Vi
+    <=
+      {p0[indexofmin]}
+      {p0[i]}
+generation 0: <MyProg:18> best=18 average=151)
+organism:
+  Vi
+    <=
+      {p0[indexofmin]}
+      {p0[i]}
+generation 1: <MyProg:18> best=18 average=77)
+organism:
+  Vi
+    <=
+      {p0[indexofmin]}
+      {p0[i]}
+generation 2: <MyProg:18> best=18 average=74)
+organism:
+  ^
+    Vi
+      <=
+        {p0[indexofmin]}
+        {p0[i]}
+    Ei
+      =
+        {p0[indexofmin]}
+        {p0[i]}
+generation 3: <MyProg:13> best=13 average=75)
+
